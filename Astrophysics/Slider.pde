@@ -25,6 +25,8 @@ class Slider{
     fill(135, 118, 171);
     rect(x, y, (value / max) * w, h, 20);
     text(value, x, y - 10);
+
+    text(name, x, y + h + 10, x + w, y + h + 10);
   }
   
   boolean changed(int mousex, int mousey){

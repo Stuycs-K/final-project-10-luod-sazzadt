@@ -1,11 +1,10 @@
 class Particle{
-  int x, y, z;
+  float x, y, z;
   float size;
   
-  Particle(int x, int y, int z, float size){
+  Particle(float x, float y, float size){
     this.x = x;
     this.y = y;
-    this.z = z;
     this.size = size;
   }
   
@@ -15,5 +14,12 @@ class Particle{
     noStroke();
     fill(255);
     sphere(size);
+    //translate(400, 400, 0);
+    //translate(x, y, z);
+    //lights();
+    noStroke();
+    fill(255);
+    //sphere(size);
+    circle(x, y, size);
   }
 }
