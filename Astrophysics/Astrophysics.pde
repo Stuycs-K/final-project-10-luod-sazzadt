@@ -9,7 +9,7 @@ MolecularCloud molCloud;
 
 void setup(){
   size(800, 800);
-  densitySlider = new Slider(400, 200, 130, 20, 0, 100, "Molecular Cloud Density"); 
+  densitySlider = new Slider(500, 700, 130, 20, 0, 100, "Molecular Cloud Density"); 
   densitySlider.display();
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
