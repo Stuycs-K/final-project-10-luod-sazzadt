@@ -1,31 +1,29 @@
-import peasy.*;
-Slider test1;
-PeasyCam cam;
-Star sun;
+//import peasy.*;
+import java.util.*;
+Slider densitySlider;
+//PeasyCam cam;
+//Star sun;
+float cloudDensity;
+MolecularCloud molCloud;
+Particle p1;
 
 void setup(){
-  smooth();
-  lights();
-  size(800, 800, P3D);
-  test1 = new Slider(400, 200, 100, 20, 0, 10, "hi"); 
-  test1.display();
-  cam = new PeasyCam(this, width/2, height/2, 0, 600);
-  cam.setMinimumDistance(400);
-  cam.setMaximumDistance(800);
-  sun = new Star(SPHERE, "sun.jpg", 140);
+  size(800, 800);
+  densitySlider = new Slider(400, 200, 130, 20, 0, 100, "Molecular Cloud Density"); 
+  densitySlider.display();
+  molCloud = new MolecularCloud(densitySlider.getValue(), 200);
+  molCloud.display();
+  p1 = new Particle(200, 200, 100);
+  p1.display();
 }
 
 void draw(){
-  background(255);
-  
+  background(0);
+  p1.display();
+  molCloud.display();
+  cloudDensity = densitySlider.getValue();
   if (mousePressed){
-    test1.changed(mouseX, mouseY);
+    densitySlider.changed(mouseX, mouseY);
   }
-  test1.display();
-  
-  pushMatrix();
-  translate(width/2, height/2, 0);
-  sun.display();
-  popMatrix();
-  
+  densitySlider.display();
 }
