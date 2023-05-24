@@ -6,7 +6,7 @@ class Core {
   float radius;
   public Core(int theShape, float theRadius) {
     radius = theRadius;
-    shape = createShape(theShape, radius);
+    shape = createShape(theShape, 0, 0, radius, radius);
   }
   public void display() {
     shape(shape);

@@ -6,20 +6,20 @@ class Star {
   float mass;
   float temperature;
   
-  public Star(int theShape, String theTexture, float theRadius, float theMass, float theTemperature) {
+  public Star(int theShape, float theRadius, float theMass, float theTemperature) {
     mass = theMass;
     temperature = theTemperature;
     radius = theRadius;
     noStroke();
-    shape = createShape(theShape, radius);
-    texture = loadImage(theTexture);
-    shape.setTexture(texture);
+    shape = createShape(theShape, 0, 0, radius, radius);
     stroke(0);
-    core = new Core(SPHERE, radius / 5);
+    core = new Core(ELLIPSE, radius / 5);
   }
-  public void display() {
+  public void display(int x, int y) {
+    pushMatrix();
+    translate(x, y);
     shape(shape);
-    core.display();
+    popMatrix();
   }
   private void expand() {
     shape.scale(1.01);
