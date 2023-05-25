@@ -10,6 +10,10 @@ Worked on a slider class that can be used to adjust initial conditions of the mo
 
 Finished the particle and molecular cloud classes (more features will be added but they are currently functional). The slider can now change the density of the molecular cloud.
 
+### 5/24/23
+
+Created the button class so that whenever it is pressed, all the set-up sliders can no longer be changed unless the button is pressed again. This is because a set of initial conditions can only correspond to one life cycle path.
+
 
 ## Tazrian Sazzad
 
