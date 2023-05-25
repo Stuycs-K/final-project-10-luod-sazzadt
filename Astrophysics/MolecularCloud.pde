@@ -11,13 +11,13 @@ class MolecularCloud{
     maxNum = (int) density * 100;
     ParticleSystem = new Particle[maxNum];
     for(int i = 0; i < maxNum / 2; i++){
-      ParticleSystem[i] = new Particle(random(400 - 100 * random(1), 400 + 100 * random(1)), random(400 - 100 * random(1), 400 + 100 * random(1)), random(1, 3));
+      ParticleSystem[i] = new Particle(random(width/2 - 100 * random(1), width/2 + 100 * random(1)), random(height/2 - 100 * random(1), height/2 + 100 * random(1)), random(1, 3));
     }
     for(int i = maxNum / 2; i < 3 * maxNum/4; i++){
-      ParticleSystem[i] = new Particle(random(400 - 200 * random(1), 400 + 200 * random(1)), random(400 - 200 * random(1), 400 + 200 * random(1)), random(1, 3));
+      ParticleSystem[i] = new Particle(random(width/2 - 200 * random(1), width/2 + 200 * random(1)), random(height/2 - 200 * random(1), height/2 + 200 * random(1)), random(1, 3));
     }
     for(int i = 3 * maxNum/4; i < maxNum; i++){
-      ParticleSystem[i] = new Particle(random(400 - 250 * random(1), 400 + 250 * random(1)), random(400 - 250 * random(1), 400 + 250 * random(1)), random(1, 3));
+      ParticleSystem[i] = new Particle(random(width/2 - 250 * random(1), width/2 + 250 * random(1)), random(height/2 - 250 * random(1), height/2 + 250 * random(1)), random(1, 3));
     }
   }
   

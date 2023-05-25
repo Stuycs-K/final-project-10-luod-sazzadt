@@ -2,13 +2,13 @@
 
 ## GROUP MEMBER 1
 
-### date x
+### 5/22/23
 
-info
+Worked on a slider class that can be used to adjust initial conditions of the molecular cloud or other setups of the star stages.
 
-### date y
+### 5/23/23
 
-info
+Finished the particle and molecular cloud classes (more features will be added but they are currently functional). The slider can now change the density of the molecular cloud.
 
 
 ## Tazrian Sazzad
