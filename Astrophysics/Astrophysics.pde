@@ -8,6 +8,7 @@ Star sun;
 int DELAY = 2;
 Button setUp;
 boolean doneSetUp = false;
+float solarMass;
 //Particle p1;
 
 void setup(){
@@ -21,6 +22,7 @@ void setup(){
   setUp = new Button(800, 650, "Finish Set Up");
   setUp.display();
   doneSetUp = false;
+  solarMass = densitySlider.getValue() / 10;
 }
 
 void tick() {

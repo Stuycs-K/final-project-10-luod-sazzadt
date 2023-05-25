@@ -10,16 +10,10 @@ class Particle{
   
   void display(){
     translate(x, y, z);
-    lights();
     noStroke();
     fill(255);
-    sphere(size);
-    //translate(400, 400, 0);
-    //translate(x, y, z);
-    //lights();
     noStroke();
     fill(255);
-    //sphere(size);
     circle(x, y, size);
   }
 }
