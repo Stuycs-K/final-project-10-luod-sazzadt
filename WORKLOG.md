@@ -1,6 +1,6 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Hellen Luo
 
 ### 5/22/23
 
