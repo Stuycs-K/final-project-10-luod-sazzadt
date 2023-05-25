@@ -24,17 +24,19 @@ class Slider{
     noStroke();
     fill(135, 118, 171);
     rect(x, y, (value / max) * w, h, 20);
-    text(value, x, y - 10);
-
-    text(name, x, y + h + 10, x + w, y + h + 10);
+    fill(215, 206, 235);
+    text(value, x, y - 7);
+    text(name, x, y + h + 5, x + w, y + h + 10);
   }
   
   boolean changed(int mousex, int mousey){
     boolean changed = false;
-    if (mousex >= x && mousex <= x + w && mousey > y && mousey < y + h){
+    if (doneSetUp == false){
+      if (mousex >= x && mousex <= x + w && mousey > y && mousey < y + h){
       changed = true;
       valueX = mousex;
       value = map(mousex, x, x + w, min, max);
+    }
     }
     return changed;
   }
