@@ -1,4 +1,3 @@
-
 class Core {
   PShape shape;
   float mass;
