@@ -6,17 +6,21 @@ float cloudDensity;
 MolecularCloud molCloud;
 Star sun;
 int DELAY = 2;
+Button setUp;
+boolean doneSetUp;
 //Particle p1;
 
 void setup(){
   size(1000, 750);
-  densitySlider = new Slider(500, 700, 130, 20, 0, 100, "Molecular Cloud Density"); 
+  densitySlider = new Slider(500, 600, 130, 20, 0, 100, "Molecular Cloud Density"); 
   densitySlider.display();
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   molCloud.display();
-  sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
-
+  //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
+  setUp = new Button(500, 670, "Finish Set Up");
+  setUp.display();
+  doneSetUp = false;
 }
 
 void tick() {
@@ -30,7 +34,7 @@ void draw(){
   if (mousePressed){
     densitySlider.changed(mouseX, mouseY);
   }
-
+  setUp.run();
   densitySlider.display();
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
