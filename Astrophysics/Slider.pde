@@ -5,14 +5,19 @@ class Slider{
   float value, valueX;
   String name;
   
-  Slider(float x, float y, float w, float h, float min, float max, String name){
+  Slider(float x, float y, float w, float h, float min, float max, String name, boolean startMiddle){
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h; 
     this.min = min;
     this.max = max;
-    this.valueX = x + max / 2;
+    if(startMiddle) {
+      this.valueX = x + max / 2;
+    }
+    else {
+      this.valueX = x;
+    }
     this.value = map(valueX, x, x + w, min, max);
     this.name = name;
   }
