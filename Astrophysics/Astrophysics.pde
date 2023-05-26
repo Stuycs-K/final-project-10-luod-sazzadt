@@ -29,8 +29,11 @@ void setup(){
 }
 
 void tick() {
-  if(frameCount % DELAY == 0) {
-    timeSlider.increment(1000);
+  if(doneSetUp) {
+    if(frameCount % DELAY == 0) {
+        timeSlider.increment(1000);
+      }
+    time = timeSlider.getValue();
   }
 }
 
