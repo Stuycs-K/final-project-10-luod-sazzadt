@@ -1,6 +1,7 @@
 class Button{
   String name, hold;
   float x, y;
+  int type;
   
   Button(float x, float y, String name){
     this.x = x;
@@ -16,7 +17,7 @@ class Button{
   void display(){
     noStroke();
     fill(215, 206, 235);
-    rect(x, y, 100, 20, 20);
+    rect(x, y, 120, 20, 20);
     fill(135, 118, 171);
     text(name, x + 10, y + 14);
   }
@@ -26,7 +27,7 @@ class Button{
     if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
       noStroke();
     fill(135, 118, 171);
-    rect(x, y, 100, 20, 20);
+    rect(x, y, 120, 20, 20);
     fill(215, 206, 235);
     text(name, x + 10, y + 14);
     }
@@ -35,7 +36,7 @@ class Button{
       if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
       noStroke();
     fill(135, 118, 171);
-    rect(x, y, 100, 20, 20);
+    rect(x, y, 120, 20, 20);
     fill(215, 206, 235);
     if (doneSetUp == false){
       name = "Reset";
@@ -62,5 +63,40 @@ class Button{
   void run(){
     display();
     update();
+  }
+  
+  void update2(){
+    if (!(mousePressed)){
+    if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    text(name, x + 10, y + 14);
+    }
+    }
+    else if (mousePressed){
+      if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    if (beginSimulate == false){
+      name = "Stop Simulation";
+      text(name, x + 10, y + 14);
+      beginSimulate = true;
+    }
+    else if (beginSimulate == true){
+      name = hold;
+      text(name, x + 10, y + 14);
+      beginSimulate = false;
+    }
+    }
+    }
+  }  
+  
+  void run2(){
+    display();
+    update2();
   }
 }

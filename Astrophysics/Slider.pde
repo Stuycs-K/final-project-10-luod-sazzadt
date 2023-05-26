@@ -12,7 +12,7 @@ class Slider{
     this.h = h; 
     this.min = min;
     this.max = max;
-    this.valueX = x + max / 2;
+    this.valueX = x + w / 2;
     this.value = map(valueX, x, x + w, min, max);
     this.name = name;
   }
