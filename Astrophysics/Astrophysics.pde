@@ -12,6 +12,11 @@ float time = 0;
 int DELAY = 3;
 boolean doneSetUp = false;
 boolean timeUp = false;
+Button begin;
+boolean beginSimulate = false;
+float solarMass;
+Stats statsboard;
+String stage;
 
 void setup(){
   size(1000, 750);
@@ -23,9 +28,14 @@ void setup(){
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   molCloud.display(doneSetUp);
   //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
-  setUp = new Button(800, 700, "Finish Set Up");
+  setUp = new Button(800, 650, "Finish Set Up");
+  begin = new Button(800, 680, "Begin Simulation");
   setUp.display();
   doneSetUp = false;
+  solarMass = densitySlider.getValue() / 10;
+  stage = "Molecular Cloud";
+  statsboard = new Stats(solarMass, 100, 100, stage);
+  statsboard.display();
 }
 
 void tick() {
@@ -48,6 +58,9 @@ void draw(){
   tick();
   densitySlider.display();
   timeSlider.display();
+  solarMass = densitySlider.getValue() / 10;
+  statsboard.changeStats(solarMass, 100, 100, stage);
+  statsboard.display();
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
     time = 0;
@@ -55,4 +68,8 @@ void draw(){
   }
   molCloud.display(doneSetUp);
   setUp.run();
+  if (doneSetUp == true){
+    begin.display();
+    begin.run2();
+  }
 }
