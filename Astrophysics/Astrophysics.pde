@@ -1,14 +1,17 @@
 import java.util.*;
+//Created Objects
 Slider densitySlider;
 Slider timeSlider;
-//Star sun;
-float cloudDensity;
 MolecularCloud molCloud;
 Star sun;
-int DELAY = 3;
 Button setUp;
+
+//Global Variables
+float cloudDensity;
+float time = 0;
+int DELAY = 3;
 boolean doneSetUp = false;
-//Particle p1;
+boolean timeUp = false;
 
 void setup(){
   size(1000, 750);
@@ -26,21 +29,26 @@ void setup(){
 }
 
 void tick() {
-  sun.updateMass(sun.getMass() * 0.998);
-  sun.updateTemp(sun.getTemp() * 0.9996);
+  if(frameCount % DELAY == 0) {
+    timeSlider.increment(1000);
+  }
 }
 
 void draw(){
   background(0);
   cloudDensity = densitySlider.getValue();
+  time = timeSlider.getValue();
   if (mousePressed){
     densitySlider.changed(mouseX, mouseY);
     timeSlider.changed(mouseX, mouseY);
   }
+  tick();
   densitySlider.display();
   timeSlider.display();
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
+    time = 0;
+    timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
   }
   molCloud.display();
   setUp.run();

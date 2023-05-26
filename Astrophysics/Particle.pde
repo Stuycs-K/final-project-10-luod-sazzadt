@@ -1,16 +1,20 @@
 class Particle{
-  PVector position, velocity, acceleration;
-  float x, y;
+  float x, y, z;
   float size;
+  PVector position;
+  PVector velocity;
+  PVector acceleration;
   
   Particle(float x, float y, float size){
     this.x = x;
     this.y = y;
+    this.z = z;
+    position = new PVector(x, y, z);
     this.size = size;
   }
   
   void display(){
-    translate(x, y);
+    translate(x, y, z);
     lights();
     noStroke();
     fill(255);

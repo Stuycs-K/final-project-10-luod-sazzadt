@@ -23,7 +23,7 @@ class MolecularCloud{
   
   void display(){
     for (int i = 0; i < ParticleSystem.length; i++){
-    ParticleSystem[i].display();
-  }
+      ParticleSystem[i].display();
+    }
   }
 }

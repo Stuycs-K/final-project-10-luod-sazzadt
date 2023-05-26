@@ -46,6 +46,11 @@ class Slider{
     return changed;
   }
   
+  void increment(float amount) {
+    if(value < max) {
+      value += amount;
+    }
+  }
   float getValue(){
     return value;
   }
