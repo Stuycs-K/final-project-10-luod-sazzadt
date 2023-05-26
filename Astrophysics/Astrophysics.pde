@@ -1,43 +1,75 @@
 import java.util.*;
+//Created Objects
 Slider densitySlider;
-//PeasyCam cam;
-//Star sun;
-float cloudDensity;
+Slider timeSlider;
 MolecularCloud molCloud;
 Star sun;
-int DELAY = 2;
 Button setUp;
+
+//Global Variables
+float cloudDensity;
+float time = 0;
+int DELAY = 3;
 boolean doneSetUp = false;
-//Particle p1;
+boolean timeUp = false;
+Button begin;
+boolean beginSimulate = false;
+float solarMass;
+Stats statsboard;
+String stage;
 
 void setup(){
   size(1000, 750);
-  densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density"); 
+  densitySlider = new Slider(800, 625, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
+  timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
+  timeSlider.display();
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
-  molCloud.display();
+  molCloud.display(doneSetUp);
   //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
   setUp = new Button(800, 650, "Finish Set Up");
+  begin = new Button(800, 680, "Begin Simulation");
   setUp.display();
   doneSetUp = false;
+  solarMass = densitySlider.getValue() / 10;
+  stage = "Molecular Cloud";
+  statsboard = new Stats(solarMass, 100, 100, stage);
+  statsboard.display();
 }
 
 void tick() {
-  sun.updateMass(sun.getMass() * 0.998);
-  sun.updateTemp(sun.getTemp() * 0.9996);
+  if(doneSetUp) {
+    if(frameCount % DELAY == 0) {
+        timeSlider.increment(1000);
+      }
+    time = timeSlider.getValue();
+  }
 }
 
 void draw(){
   background(0);
   cloudDensity = densitySlider.getValue();
+  time = timeSlider.getValue();
   if (mousePressed){
     densitySlider.changed(mouseX, mouseY);
+    timeSlider.changed(mouseX, mouseY);
   }
+  tick();
   densitySlider.display();
+  timeSlider.display();
+  solarMass = densitySlider.getValue() / 10;
+  statsboard.changeStats(solarMass, 100, 100, stage);
+  statsboard.display();
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
+    time = 0;
+    timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
   }
-  molCloud.display();
+  molCloud.display(doneSetUp);
   setUp.run();
+  if (doneSetUp == true){
+    begin.display();
+    begin.run2();
+  }
 }

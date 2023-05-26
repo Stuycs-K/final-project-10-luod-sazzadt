@@ -21,16 +21,16 @@ class Star {
     shape(shape);
     popMatrix();
   }
-  private void expand() {
-    shape.scale(1.01);
-  }
-  private void contract() {
-    shape.scale(0.99);
-  }
-  private void rotate() {
-    shape.rotateY(0.01);
-    shape.rotateZ(0.005);
-  }
+  //private void expand() {
+  //  shape.scale(1.01);
+  //}
+  //private void contract() {
+  //  shape.scale(0.99);
+  //}
+  //private void rotate() {
+  //  shape.rotateY(0.01);
+  //  shape.rotateZ(0.005);
+  //}
   public void displayData(int x, int y) {
     textSize(16);
     fill(255, 0, 0);
