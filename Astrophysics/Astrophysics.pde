@@ -20,7 +20,7 @@ String stage;
 
 void setup(){
   size(1000, 750);
-  densitySlider = new Slider(800, 625, 130, 20, 0, 100, "Molecular Cloud Density", true); 
+  densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
   timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
   timeSlider.display();
@@ -28,8 +28,8 @@ void setup(){
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   molCloud.display(doneSetUp);
   //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
-  setUp = new Button(800, 650, "Finish Set Up");
-  begin = new Button(800, 680, "Begin Simulation");
+  setUp = new Button(800, 650, "Begin Simulation");
+  //begin = new Button(800, 680, "Begin Simulation");
   setUp.display();
   doneSetUp = false;
   solarMass = densitySlider.getValue() / 10;
@@ -53,7 +53,7 @@ void draw(){
   time = timeSlider.getValue();
   if (mousePressed){
     densitySlider.changed(mouseX, mouseY);
-    timeSlider.changed(mouseX, mouseY);
+    //timeSlider.changed(mouseX, mouseY);
   }
   tick();
   densitySlider.display();
@@ -68,8 +68,8 @@ void draw(){
   }
   molCloud.display(doneSetUp);
   setUp.run();
-  if (doneSetUp == true){
-    begin.display();
-    begin.run2();
-  }
+  //if (doneSetUp == true){
+  //  begin.display();
+  //  begin.run2();
+  //}
 }
