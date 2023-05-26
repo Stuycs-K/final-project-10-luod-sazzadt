@@ -28,3 +28,12 @@ Created 3D sun object through setup() and draw() methods, with downloaded textur
 Wrote expand, contract, and rotate methods for star class.
 Created initial core class and implemented instance of core in every star.
 Created display for temperature and mass values of star object, wrote tick() method to update temp and mass using getter and setter methods.
+
+### 5/24/23
+Converted the 3D star and core classes to 2D, implemented light emission effect on particle class, albeit very laggy. FORGOT TO PUSH!
+
+### 5/25/23
+Created timeline slider that updates based on frameCount, resets whenever the density is reset.
+Implemented gravitational attraction between particles and a "center of gravity," works for all densities and with the rate easily changeable.
+Simulated growth of star core dependent on how many molecules collapse into the center.
+Tried to fix super laggy light effect (not successful)
