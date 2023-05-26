@@ -12,7 +12,7 @@ class LightParticleSystem {
     origin = v.copy();                                   // Store the origin point
     img = img_;
     for (int i = 0; i < num; i++) {
-      lightparticles.add(new LightParticle(origin, img));         // Add "num" amount of particles to the arraylist
+      lightparticles.add(new LightParticle(origin));         // Add "num" amount of particles to the arraylist
     }
   }
 
@@ -35,6 +35,6 @@ class LightParticleSystem {
   }  
 
   void addParticle() {
-    lightparticles.add(new LightParticle(origin, img));
+    lightparticles.add(new LightParticle(origin));
   }
 }

@@ -6,16 +6,14 @@ class LightParticle {
   PVector vel;
   PVector acc;
   float lifespan;
-  PImage img;
 
-  LightParticle(PVector l, PImage img_) {
+  LightParticle(PVector l) {
     acc = new PVector(0, 0);
     float vx = randomGaussian()*0.3;
     float vy = randomGaussian()*0.3 - 1.0;
     vel = new PVector(vx, vy);
     loc = l.copy();
     lifespan = 100.0;
-    img = img_;
   }
 
   void run() {
@@ -41,7 +39,7 @@ class LightParticle {
   void render() {
     imageMode(CENTER);
     tint(255, lifespan);
-    image(img, loc.x, loc.y);
+    //image(img, loc.x, loc.y);
     // Drawing a circle instead
     // fill(255,lifespan);
     // noStroke();
