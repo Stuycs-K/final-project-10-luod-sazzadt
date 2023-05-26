@@ -9,6 +9,7 @@ int DELAY = 2;
 Button setUp;
 boolean doneSetUp = false;
 float solarMass;
+Stats statsboard;
 //Particle p1;
 
 void setup(){
@@ -23,6 +24,8 @@ void setup(){
   setUp.display();
   doneSetUp = false;
   solarMass = densitySlider.getValue() / 10;
+  statsboard = new Stats(solarMass, 100, 100);
+  statsboard.display();
 }
 
 void tick() {
@@ -37,6 +40,9 @@ void draw(){
     densitySlider.changed(mouseX, mouseY);
   }
   densitySlider.display();
+  solarMass = densitySlider.getValue() / 10;
+  statsboard.changeStats(solarMass, 100, 100);
+  statsboard.display();
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   }
