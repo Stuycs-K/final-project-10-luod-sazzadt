@@ -13,7 +13,7 @@ class Slider{
     this.min = min;
     this.max = max;
     if(startMiddle) {
-      this.valueX = x + max / 2;
+      this.valueX = x + w / 2;
     }
     else {
       this.valueX = x;

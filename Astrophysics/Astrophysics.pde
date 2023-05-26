@@ -12,9 +12,9 @@ boolean doneSetUp = false;
 
 void setup(){
   size(1000, 750);
-  densitySlider = new Slider(800, 650, 130, 20, 0, 100, "Molecular Cloud Density", true); 
+  densitySlider = new Slider(800, 625, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
-  timeSlider = new Slider(100, 650, 300, 20, 0, 10_000, "Time (thousands of years)", false);
+  timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);

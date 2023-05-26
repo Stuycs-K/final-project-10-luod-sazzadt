@@ -1,5 +1,6 @@
 class Particle{
-  float x, y, z;
+  PVector position, velocity, acceleration;
+  float x, y;
   float size;
   
   Particle(float x, float y, float size){
@@ -9,7 +10,7 @@ class Particle{
   }
   
   void display(){
-    translate(x, y, z);
+    translate(x, y);
     lights();
     noStroke();
     fill(255);
