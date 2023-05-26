@@ -6,11 +6,12 @@ float cloudDensity;
 MolecularCloud molCloud;
 Star sun;
 int DELAY = 2;
-Button setUp;
+Button setUp, begin;
 boolean doneSetUp = false;
+boolean beginSimulate = false;
 float solarMass;
 Stats statsboard;
-//Particle p1;
+String stage;
 
 void setup(){
   size(1000, 750);
@@ -21,10 +22,12 @@ void setup(){
   molCloud.display();
   //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
   setUp = new Button(800, 650, "Finish Set Up");
+  begin = new Button(800, 680, "Begin Simulation");
   setUp.display();
   doneSetUp = false;
   solarMass = densitySlider.getValue() / 10;
-  statsboard = new Stats(solarMass, 100, 100);
+  stage = "Molecular Cloud";
+  statsboard = new Stats(solarMass, 100, 100, stage);
   statsboard.display();
 }
 
@@ -41,11 +44,15 @@ void draw(){
   }
   densitySlider.display();
   solarMass = densitySlider.getValue() / 10;
-  statsboard.changeStats(solarMass, 100, 100);
+  statsboard.changeStats(solarMass, 100, 100, stage);
   statsboard.display();
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   }
   molCloud.display();
   setUp.run();
+  if (doneSetUp == true){
+    begin.display();
+    begin.run2();
+  }
 }
