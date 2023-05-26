@@ -14,6 +14,10 @@ Finished the particle and molecular cloud classes (more features will be added b
 
 Created the button class so that whenever it is pressed, all the set-up sliders can no longer be changed unless the button is pressed again. This is because a set of initial conditions can only correspond to one life cycle path.
 
+### 5/25/23
+
+Created the stats class to display the numerical information about the characteristics of the star (which will update automatically once the simulation begins). Also added on to the button class for the "start simulation" button.
+
 
 ## Tazrian Sazzad
 
