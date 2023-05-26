@@ -21,7 +21,7 @@ void setup(){
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
-  molCloud.display();
+  molCloud.display(doneSetUp);
   //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
   setUp = new Button(800, 700, "Finish Set Up");
   setUp.display();
@@ -53,6 +53,6 @@ void draw(){
     time = 0;
     timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
   }
-  molCloud.display();
+  molCloud.display(doneSetUp);
   setUp.run();
 }

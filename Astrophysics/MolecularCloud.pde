@@ -6,7 +6,7 @@ class MolecularCloud{
   int radius, r1, maxNum;
   
   MolecularCloud(float density, int radius){
-    centerOfGravity = new Particle(width/2, height/2, 1, 100);
+    centerOfGravity = new Particle(width/2, height/2, 10, 5);
     this.density = density / 100;
     this.radius = radius;
     r1 = radius;
@@ -23,13 +23,18 @@ class MolecularCloud{
     }
   }
   
-  void display(){
+  void display(boolean doneSetUp){
     centerOfGravity.display();
     for (int i = 0; i < ParticleSystem.length; i++){
       Particle particle = ParticleSystem[i];
-      particle.move();
+      if(doneSetUp) {        
+        particle.move();
+      }
       particle.display();
-      particle.applyForce(particle.attractTo(centerOfGravity));
+      if(doneSetUp) {
+        particle.applyForce(particle.attractTo(centerOfGravity));
+        particle.checkCloseToCenter();
+      }
     }
   }
 }

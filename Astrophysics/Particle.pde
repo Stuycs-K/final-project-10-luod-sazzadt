@@ -52,4 +52,12 @@ class Particle{
   void applyForce(PVector f) {
     acceleration.add(f.div(mass));
   }
+  
+  void checkCloseToCenter(){
+    if(position.dist(new PVector(width/2, height/2, 0)) < 10) {
+      mass = 0;
+      acceleration = new PVector(0, 0, 0);
+      velocity = new PVector(0, 0, 0);
+    }
+  }
 }
