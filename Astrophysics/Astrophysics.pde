@@ -12,17 +12,17 @@ float time = 0;
 int DELAY = 3;
 boolean doneSetUp = false;
 boolean timeUp = false;
-Button begin;
 boolean beginSimulate = false;
 float solarMass;
 Stats statsboard;
 String stage;
+boolean contract;
 
 void setup(){
   size(1000, 750);
   densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
-  timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
+  timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
@@ -32,10 +32,11 @@ void setup(){
   //begin = new Button(800, 680, "Begin Simulation");
   setUp.display();
   doneSetUp = false;
-  solarMass = densitySlider.getValue() / 10;
+  solarMass = 0;
   stage = "Molecular Cloud";
-  statsboard = new Stats(solarMass, 100, 100, stage);
+  statsboard = new Stats(solarMass, stage);
   statsboard.display();
+  contract = false;
 }
 
 void tick() {
@@ -57,25 +58,27 @@ void draw(){
   }
   tick();
   densitySlider.display();
+  //solarMass = densitySlider.getValue() / 10;
   timeSlider.display();
-  solarMass = densitySlider.getValue() / 10;
-  statsboard.changeStats(solarMass, 100, 100, stage);
   statsboard.display();
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
     time = 0;
-    timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
+    timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
   }
-  if (!doneSetUp){
+  if (doneSetUp){
     molCloud.display();
   }
   molCloud.display(doneSetUp);
-  if (timeSlider.getValue() >= 1000000){
+  if (timeSlider.getValue() >= 200000){
     stage = "Protostar";
   }
   setUp.run();
-  //if (doneSetUp == true){
-  //  begin.display();
-  //  begin.run2();
-  //}
+  time = timeSlider.getValue();
+  statsboard.changeStats(solarMass, stage);
+  //Entering Red Giant phase
+  boolean hold = contract;
+  molCloud.redGiant(contract);
+  if (hold){contract = false;}
+  else{contract = true;}
 }
