@@ -66,7 +66,13 @@ void draw(){
     time = 0;
     timeSlider = new Slider(50, 625, 350, 20, 0, 200000, "Time (in thousands of years)", false);
   }
+  if (!doneSetUp){
+    molCloud.display();
+  }
   molCloud.display(doneSetUp);
+  if (timeSlider.getValue() >= 1000000){
+    stage = "Protostar";
+  }
   setUp.run();
   //if (doneSetUp == true){
   //  begin.display();

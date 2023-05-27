@@ -23,6 +23,12 @@ class MolecularCloud{
     }
   }
   
+  void display(){
+    for (int i = 0; i < ParticleSystem.length; i++){
+    ParticleSystem[i].display();
+  }
+  }
+  
   void display(boolean doneSetUp){
     centerOfGravity.display();
     for (int i = 0; i < ParticleSystem.length; i++){

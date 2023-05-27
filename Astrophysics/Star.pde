@@ -5,6 +5,7 @@ class Star {
   float radius;
   float mass;
   float temperature;
+  Particle centerOfGravity2;
   
   public Star(int theShape, float theRadius, float theMass, float theTemperature) {
     mass = theMass;
@@ -14,6 +15,7 @@ class Star {
     shape = createShape(theShape, 0, 0, radius, radius);
     stroke(0);
     core = new Core(ELLIPSE, radius / 5);
+    centerOfGravity2 = new Particle(width/2, height/2, 10, 5, false);
   }
   public void display(int x, int y) {
     pushMatrix();
@@ -49,4 +51,18 @@ class Star {
   public void updateTemp(float newTemp) {
     temperature = newTemp;
   }
-}
+  
+  void redGiant(){
+    int i = 1;
+    while (time > 10 && time < 10000){
+      if (i == 1 && frameCount % 3 == 0){
+        centerOfGravity2.size += 0.5;
+        i = 2;
+      }
+      else{
+        centerOfGravity2.size -= 0.2;
+        i = 1;
+      }
+    }
+  }
+  }
