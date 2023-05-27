@@ -23,8 +23,15 @@ class MolecularCloud{
     }
   }
   
+  void display(){
+    for (int i = 0; i < ParticleSystem.length; i++){
+    ParticleSystem[i].display();
+  }
+  }
+  
   void display(boolean doneSetUp){
     centerOfGravity.display();
+    if (time <= 200000){
     for (int i = 0; i < ParticleSystem.length; i++){
       Particle particle = ParticleSystem[i];
       if(doneSetUp) {        
@@ -35,8 +42,29 @@ class MolecularCloud{
         particle.applyForce(particle.attractTo(centerOfGravity));
         if(particle.checkCloseToCenter()) {
           centerOfGravity.size += 0.02;
+          solarMass += 0.001;
         }
       }
     }
+    }
   }
+  
+  void redGiant(boolean increase){
+    centerOfGravity.display();
+    if (time > 200000 && time <= 300000){
+      //if (frameCount % 2 == 0){
+        //if (increase){increase();}
+        //else{decrease();}
+      //}
+      increase();
+  }
+  }
+  
+  void increase(){
+      centerOfGravity.size += 0.5;
+ }
+ 
+ void decrease(){
+      centerOfGravity.size -= 0.2;
+ }
 }
