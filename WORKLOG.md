@@ -18,6 +18,9 @@ Created the button class so that whenever it is pressed, all the set-up sliders 
 
 Created the stats class to display the numerical information about the characteristics of the star (which will update automatically once the simulation begins). Also added on to the button class for the "start simulation" button.
 
+### 5/26/23
+
+Changed up the display of stats and the star so they are true to real science. Began working on simulating the red giant branch.
 
 ## Tazrian Sazzad
 
