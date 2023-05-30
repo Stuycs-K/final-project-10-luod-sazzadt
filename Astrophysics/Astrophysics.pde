@@ -75,8 +75,16 @@ void draw(){
   //}
   //
   molCloud.display(doneSetUp, r, g, b);
-  g = g - 0.2;
-  b = b - 0.2;
+  if (doneSetUp){
+  if (densitySlider.getValue() < 80){
+    g = g - 0.2;
+    b = b - 0.2;
+  }
+  else if (densitySlider.getValue() >= 80){
+   r = r - 0.2;
+   g = g - 0.2;
+  }
+  }
   //if (time <= 200000){
   //  g--;
   //  b--;
