@@ -25,9 +25,10 @@ class MolecularCloud{
   
   void display(){
     for (int i = 0; i < ParticleSystem.length; i++){
-    ParticleSystem[i].display();
+    ParticleSystem[i].display(255, 255, 255);
   }
   }
+<<<<<<< HEAD
 void display(boolean doneSetUp){
     if(doneSetUp) {
       centerOfGravity.display();
@@ -55,20 +56,46 @@ void display(boolean doneSetUp){
               }
             }
           }
+=======
+  
+  void display(boolean doneSetUp, float r, float g, float b){
+    centerOfGravity.display(r, g, b);
+    if (time <= 200000){
+    for (int i = 0; i < ParticleSystem.length; i++){
+      Particle particle = ParticleSystem[i];
+      if(doneSetUp) {        
+        particle.move();
+      }
+      particle.display(255, 255, 255);
+      if(doneSetUp) {
+        particle.applyForce(particle.attractTo(centerOfGravity));
+        if(particle.checkCloseToCenter()) {
+          centerOfGravity.size += 0.02;
+          solarMass += 0.001;
+>>>>>>> 5d3ffd8a5269b9095de0bb897bc1924e3a5a1381
         }
       }
     }
   }
   
   void redGiant(boolean increase){
+<<<<<<< HEAD
     centerOfGravity.display();
     if (time > 300000 && time <= 400000){
+=======
+    centerOfGravity.display(255, 255, 255);
+    if (time > 200000 && time <= 300000){
+>>>>>>> 5d3ffd8a5269b9095de0bb897bc1924e3a5a1381
       //if (frameCount % 2 == 0){
         //if (increase){increase();}
         //else{decrease();}
       //}
       increase();
   }
+  }
+  
+  void updateColor(int r, int g, int b){
+    centerOfGravity.display(r, g, b);
   }
   
   void increase(){

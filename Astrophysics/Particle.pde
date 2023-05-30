@@ -27,17 +27,17 @@ class Particle{
     }
   }
   
-  void display(){
+  void display(float r, float g, float b){
     x = position.x;
     y = position.y;
     z = position.z;
     translate(x, y, z);
     noStroke();
-    fill(255);
+    fill(r, g, b);
     //translate(400, 400, 0);
     //translate(x, y, z);
     noStroke();
-    fill(255);
+    fill(r, g, b);
     //sphere(size);
     /*
     if(x == width/2 && y == height /2) {

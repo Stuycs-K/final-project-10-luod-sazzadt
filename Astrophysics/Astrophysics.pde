@@ -17,6 +17,7 @@ float solarMass;
 Stats statsboard;
 String stage;
 boolean contract;
+float r, g, b;
 
 void setup(){
   size(1000, 750);
@@ -26,7 +27,6 @@ void setup(){
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
-  molCloud.display(doneSetUp);
   //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
   setUp = new Button(800, 650, "Begin Simulation");
   //begin = new Button(800, 680, "Begin Simulation");
@@ -37,6 +37,10 @@ void setup(){
   statsboard = new Stats(solarMass, stage);
   statsboard.display();
   contract = false;
+  r = 255;
+  g = 255;
+  b = 255;
+  molCloud.display(doneSetUp, r, g, b);
 }
 
 void tick() {
@@ -66,10 +70,26 @@ void draw(){
     time = 0;
     timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
   }
+  //if (doneSetUp){
+  //  molCloud.display();
+  //}
+  //
+  molCloud.display(doneSetUp, r, g, b);
   if (doneSetUp){
-    molCloud.display();
+  if (densitySlider.getValue() < 80){
+    g = g - 0.2;
+    b = b - 0.2;
   }
-  molCloud.display(doneSetUp);
+  else if (densitySlider.getValue() >= 80){
+   r = r - 0.2;
+   g = g - 0.2;
+  }
+  }
+  //if (time <= 200000){
+  //  g--;
+  //  b--;
+  //  molCloud.updateColor(r, g, b);
+  //}
   if (timeSlider.getValue() >= 200000){
     stage = "Protostar";
   }
@@ -78,7 +98,7 @@ void draw(){
   statsboard.changeStats(solarMass, stage);
   //Entering Red Giant phase
   boolean hold = contract;
-  molCloud.redGiant(contract);
-  if (hold){contract = false;}
-  else{contract = true;}
+  //molCloud.redGiant(contract);
+  //if (hold){contract = false;}
+  //else{contract = true;}
 }
