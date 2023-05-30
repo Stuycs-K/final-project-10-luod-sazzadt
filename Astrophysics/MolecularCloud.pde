@@ -25,19 +25,19 @@ class MolecularCloud{
   
   void display(){
     for (int i = 0; i < ParticleSystem.length; i++){
-    ParticleSystem[i].display();
+    ParticleSystem[i].display(255, 255, 255);
   }
   }
   
-  void display(boolean doneSetUp){
-    centerOfGravity.display();
+  void display(boolean doneSetUp, float r, float g, float b){
+    centerOfGravity.display(r, g, b);
     if (time <= 200000){
     for (int i = 0; i < ParticleSystem.length; i++){
       Particle particle = ParticleSystem[i];
       if(doneSetUp) {        
         particle.move();
       }
-      particle.display();
+      particle.display(255, 255, 255);
       if(doneSetUp) {
         particle.applyForce(particle.attractTo(centerOfGravity));
         if(particle.checkCloseToCenter()) {
@@ -50,7 +50,7 @@ class MolecularCloud{
   }
   
   void redGiant(boolean increase){
-    centerOfGravity.display();
+    centerOfGravity.display(255, 255, 255);
     if (time > 200000 && time <= 300000){
       //if (frameCount % 2 == 0){
         //if (increase){increase();}
@@ -58,6 +58,10 @@ class MolecularCloud{
       //}
       increase();
   }
+  }
+  
+  void updateColor(int r, int g, int b){
+    centerOfGravity.display(r, g, b);
   }
   
   void increase(){
