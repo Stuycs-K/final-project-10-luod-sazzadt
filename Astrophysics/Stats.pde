@@ -33,5 +33,8 @@ class Stats{
   }
   
   void graphLuminosity(){
+    noStroke();
+    fill(215, 206, 235);
+    rect(50, 50, 290, 100, 20);
   }
  }

@@ -18,6 +18,7 @@ Stats statsboard;
 String stage;
 boolean contract;
 float r, g, b;
+ArrayDeque<Integer> lumGraph;
 
 void setup(){
   size(1000, 750);
@@ -75,14 +76,14 @@ void draw(){
   //}
   //
   molCloud.display(doneSetUp, r, g, b);
-  if (doneSetUp){
+  if (doneSetUp && time <= 200000){
   if (densitySlider.getValue() < 80){
-    g = g - 0.2;
-    b = b - 0.2;
+    g = g - 0.2 * (densitySlider.getValue() / 100);
+    b = b - 0.2 * (densitySlider.getValue() / 100);
   }
   else if (densitySlider.getValue() >= 80){
-   r = r - 0.2;
-   g = g - 0.2;
+   r = r - 0.2 * (densitySlider.getValue() / 100);
+   g = g - 0.2 * (densitySlider.getValue() / 100);
   }
   }
   //if (time <= 200000){

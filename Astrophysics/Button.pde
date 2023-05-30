@@ -2,6 +2,7 @@ class Button{
   String name, hold;
   float x, y;
   int type;
+  int lastPressed = -1;
   
   Button(float x, float y, String name){
     this.x = x;
@@ -33,6 +34,11 @@ class Button{
     }
     }
     else if (mousePressed){
+      if(lastPressed > 0) {
+        if(frameCount - lastPressed < 10) {
+          return;
+        }
+      }
       if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
       noStroke();
     fill(135, 118, 171);
@@ -54,7 +60,7 @@ class Button{
   
   boolean changed(int mousex, int mousey){
     boolean changed = false;
-    if (mousex >= x && mousex <= x + 50 && mousey > y && mousey < y + 20){
+    if (mousex >= x && mousex <= x + 50 && mousey >= y && mousey <= y + 20){
       changed = true;
     }
     return changed;
