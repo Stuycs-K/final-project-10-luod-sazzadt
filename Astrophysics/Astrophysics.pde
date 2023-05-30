@@ -17,6 +17,7 @@ float solarMass;
 Stats statsboard;
 String stage;
 boolean contract;
+float theta = 0;
 
 void setup(){
   size(1000, 750);

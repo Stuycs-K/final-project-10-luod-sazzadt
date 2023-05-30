@@ -9,6 +9,7 @@ class Particle{
   LightParticleSystem ps;
   boolean smoky;
   PImage img = loadImage("smoke.png");
+  float theta = 0;
 
   
   Particle(float x, float y, float size, float mass, boolean smoky){
@@ -86,5 +87,24 @@ class Particle{
       return true;
     }
     return false;
+  }
+  
+  boolean closeToFoci(Particle foci) {
+    return (position.dist(foci.position) < 10);
+  }
+  
+  void drawEllipse() {
+    pushMatrix();
+    float radiusX = 50;
+    float radiusY = 100;
+    translate(x, y);
+    theta += 0.01;
+    float posX = radiusX * cos(  5 * theta );
+    float posY = radiusY * sin( 5 * theta );
+    posX = posX * cos(7 * PI / 8) - posY * sin(7 * PI / 8);
+    posY = posY * cos(7 * PI / 8) + posX * sin(7 * PI / 8);
+    fill( 255 );
+    ellipse( posX, posY, 5, 5 );
+    popMatrix();
   }
 }

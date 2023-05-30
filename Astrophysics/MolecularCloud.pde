@@ -1,12 +1,14 @@
 class MolecularCloud{
   
   Particle[] ParticleSystem;
-  Particle centerOfGravity;
+  Particle centerOfGravity, foci1, foci2;
   float density;
   int radius, r1, maxNum;
   
   MolecularCloud(float density, int radius){
     centerOfGravity = new Particle(width/2, height/2, 10, 5, false);
+    foci1 = new Particle(width / 3, 2 * height / 3, 10, 5, false);
+    foci2 = new Particle(width / 3, 2 * height / 3, 10, 5, false);
     this.density = density / 100;
     this.radius = radius;
     r1 = radius;
@@ -31,27 +33,35 @@ class MolecularCloud{
   
   void display(boolean doneSetUp){
     centerOfGravity.display();
-    if (time <= 200000){
-    for (int i = 0; i < ParticleSystem.length; i++){
-      Particle particle = ParticleSystem[i];
-      if(doneSetUp) {        
-        particle.move();
-      }
-      particle.display();
-      if(doneSetUp) {
-        particle.applyForce(particle.attractTo(centerOfGravity));
-        if(particle.checkCloseToCenter()) {
-          centerOfGravity.size += 0.02;
-          solarMass += 0.001;
+    if (time <= 300000){
+      if(time < 200_000) {
+        for (int i = 0; i < ParticleSystem.length; i++){
+          Particle particle = ParticleSystem[i];
+          particle.drawEllipse();
         }
       }
-    }
+      else { 
+        for (int i = 0; i < ParticleSystem.length; i++){
+          Particle particle = ParticleSystem[i];
+          if(doneSetUp) {        
+            particle.move();
+          }
+          particle.display();
+          if(doneSetUp) {
+            particle.applyForce(particle.attractTo(centerOfGravity));
+            if(particle.checkCloseToCenter()) {
+              centerOfGravity.size += 0.02;
+              solarMass += 0.001;
+            }
+          }
+        }
+      }
     }
   }
   
   void redGiant(boolean increase){
     centerOfGravity.display();
-    if (time > 200000 && time <= 300000){
+    if (time > 300000 && time <= 400000){
       //if (frameCount % 2 == 0){
         //if (increase){increase();}
         //else{decrease();}
