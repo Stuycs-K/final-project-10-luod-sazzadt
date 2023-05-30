@@ -10,6 +10,8 @@ class Particle{
   boolean smoky;
   PImage img = loadImage("smoke.png");
   float theta = 0;
+  int rotateFactor = (int) (Math.random() * 9);
+
 
   
   Particle(float x, float y, float size, float mass, boolean smoky){
@@ -99,12 +101,12 @@ class Particle{
     float radiusY = 100;
     translate(x, y);
     theta += 0.01;
-    float posX = radiusX * cos(  5 * theta );
-    float posY = radiusY * sin( 5 * theta );
+    float posX = radiusX * cos(rotateFactor * theta );
+    float posY = radiusY * sin(rotateFactor * theta );
     posX = posX * cos(7 * PI / 8) - posY * sin(7 * PI / 8);
     posY = posY * cos(7 * PI / 8) + posX * sin(7 * PI / 8);
     fill( 255 );
-    ellipse( posX, posY, 5, 5 );
+    ellipse( posX, posY, size, size );
     popMatrix();
   }
 }
