@@ -40,10 +40,10 @@ class LightParticle {
     imageMode(CENTER);
     tint(255, lifespan);
     //image(img, loc.x, loc.y);
-    // Drawing a circle instead
-    // fill(255,lifespan);
-    // noStroke();
-    // ellipse(loc.x,loc.y,img.width,img.height);
+    //Drawing a circle instead
+    fill(255,lifespan);
+    noStroke();
+    ellipse(loc.x,loc.y,2,2);
   }
 
   // Is the particle still useful?

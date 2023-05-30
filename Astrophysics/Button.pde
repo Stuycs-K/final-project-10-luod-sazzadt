@@ -2,6 +2,7 @@ class Button{
   String name, hold;
   float x, y;
   int type;
+  int lastPressed = -1;
   
   Button(float x, float y, String name){
     this.x = x;
@@ -24,31 +25,37 @@ class Button{
   
   void update(){
     if (!(mousePressed)){
-    if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
-      noStroke();
-    fill(135, 118, 171);
-    rect(x, y, 120, 20, 20);
-    fill(215, 206, 235);
-    text(name, x + 10, y + 14);
-    }
+      if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+        noStroke();
+        fill(135, 118, 171);
+        rect(x, y, 120, 20, 20);
+        fill(215, 206, 235);
+        text(name, x + 10, y + 14);
+      }
     }
     else if (mousePressed){
+      if(lastPressed > 0) {
+        if(frameCount - lastPressed < 20) {
+          return;
+        }
+      }
       if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
-      noStroke();
-    fill(135, 118, 171);
-    rect(x, y, 120, 20, 20);
-    fill(215, 206, 235);
-    if (doneSetUp == false){
-      name = "Reset";
-      text(name, x + 10, y + 14);
-      doneSetUp = true;
-    }
-    else if (doneSetUp == true){
-      name = hold;
-      text(name, x + 10, y + 14);
-      doneSetUp = false;
-    }
-    }
+        lastPressed = frameCount;
+        noStroke();
+        fill(135, 118, 171);
+        rect(x, y, 120, 20, 20);
+        fill(215, 206, 235);
+        if (doneSetUp == false){
+          name = "Reset";
+          text(name, x + 10, y + 14);
+          doneSetUp = true;
+        }
+        else if (doneSetUp == true){
+          name = hold;
+          text(name, x + 10, y + 14);
+          doneSetUp = false;
+        }
+      }
     }
   }
   
