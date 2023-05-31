@@ -51,10 +51,12 @@ class Particle{
     velocity.add(acceleration);
     position.add(velocity);
     acceleration.set(0, 0);
+    /*
     if(smoky) {
      // ps = new LightParticleSystem(0, position);
 
     }
+    */
   }
   
   PVector attractTo(Particle other) {

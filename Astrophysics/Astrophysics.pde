@@ -27,7 +27,7 @@ void setup(){
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
-  sun = new Star(ELLIPSE, molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
+  sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
   setUp = new Button(800, 650, "Begin Simulation");
   //begin = new Button(800, 680, "Begin Simulation");
   setUp.display();
@@ -72,14 +72,16 @@ void draw(){
     time = 0;
     timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
   }
-  if(sun.radius != molCloud. COGSize()) {
-    sun = new Star(ELLIPSE, molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
+  
+  if(sun.radius != molCloud.COGSize()) {
+    sun.updateSize(molCloud.COGSize());
   }
+  
   
   //Display molecular cloud and sun with glow effect
   molCloud.display(doneSetUp, r, g, b);
-  //sun.display(width / 4, height / 2, r, g, b);
-  sun.glow(width / 2, height / 2, 90);
+  //sun.display(width / 2, height / 2, r, g, b);
+  sun.glow(width / 2, height / 2, 90 - (statsboard.luminosity/ 10));
   if (doneSetUp){
     if (densitySlider.getValue() < 80){
       g = g - 0.2;

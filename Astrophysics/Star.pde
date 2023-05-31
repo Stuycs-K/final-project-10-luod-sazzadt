@@ -1,28 +1,24 @@
 class Star {
   Core core;
-  PShape shape;
-  PImage texture;
   float radius;
   float mass;
   float temperature;
   Particle centerOfGravity2;
   
-  public Star(int theShape, float theRadius, float theMass, float theTemperature) {
+  public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
     temperature = theTemperature;
     radius = theRadius;
-    noStroke();
-    shape = createShape(theShape, 0, 0, radius, radius);
-    stroke(0);
     core = new Core(ELLIPSE, radius / 5);
   }
   public void display(int x, int y, float r, float g, float b) {
-    pushMatrix();
-    translate(x, y);
     fill(r, g, b);
-    shape(shape);
+    circle(x, y, radius);
     noFill();
-    popMatrix();
+  }
+  
+  public void updateSize(float r) {
+    radius = r;
   }
   
   void glow(float x, float y, float saturation) {
@@ -31,7 +27,7 @@ class Star {
     noStroke();
     for (float r = 0.0; r < 0.5; r += 0.01) {
       fill(0, saturation, 5, 100);
-      circle(x, y, y * r * (radius / 20));
+      circle(x, y, y * r * (radius / 20) * 0.5);
     }
     colorMode(RGB, 255, 255, 255);
     blendMode(BLEND);
