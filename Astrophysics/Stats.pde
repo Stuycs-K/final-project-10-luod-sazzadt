@@ -57,25 +57,30 @@ class Stats{
   
   void updateGraph(){
     if (lumGraph.size() >= 2){
-      if (timeNow >= end){
+      if (timeNow >= 99999){
         start = end;
-        end = end + 10000;
+        end = end + 100000;
+        timeNow = 0;
         remakeGraph();
         updateGraph();
+        return;
       }
       else{
         int size = lumGraph.size();
-        float time1 = timeNow;
-        float time2 = timeNow + 1000;
-        float n1 = lumGraph.get(size - 2);
-        float n2 = lumGraph.get(size - 1);
+        float time1 = 0;
         stroke(135, 118, 171);
-        line(720 + 210 * time1/end, 200 - n1/1000 * 110, 720 + 210 * time2/end, 200 - n2/1000 * 110);
+        for (int i = 0; i < size - 1; i++){
+        float n1 = lumGraph.get(i);
+        float n2 = lumGraph.get(i + 1);
+          line(720 + (210 * (time1/100000)), 200 - ((n1/1000) * 110), 720 + (210 * (time1/100000)) + 2.1, 200 - ((n2/1000) * 110));
+          time1 = time1 + 1000;
+        }
       }
     }
   }
   
   void remakeGraph(){
+    lumGraph.clear();
      noStroke();
     fill(215, 206, 235);
     rect(685, 80, 265, 150, 20);
@@ -89,7 +94,6 @@ class Stats{
     text("1000", 694, 98);
     text(start, 718, 212);
     text(end, 905, 212);
-    lumGraph.clear();
   }
  }
  

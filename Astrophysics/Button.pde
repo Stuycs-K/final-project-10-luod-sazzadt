@@ -35,7 +35,7 @@ class Button{
     }
     else if (mousePressed){
       if(lastPressed > 0) {
-        if(frameCount - lastPressed < 10) {
+        if(frameCount - lastPressed < 35) {
           return;
         }
       }
@@ -82,6 +82,11 @@ class Button{
     }
     }
     else if (mousePressed){
+      if(lastPressed > 0) {
+        if(frameCount - lastPressed < 35) {
+          return;
+        }
+      }
       if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
       noStroke();
     fill(135, 118, 171);
@@ -95,7 +100,7 @@ class Button{
     else if (showGraph == true){
       name = hold;
       text(name, x + 10, y + 14);
-      beginSimulate = false;
+      showGraph = false;
     }
     }
     }

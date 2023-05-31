@@ -22,7 +22,8 @@ boolean contract;
 float r, g, b;
 ArrayList<Float> lumGraph;
 boolean showGraph;
-int start, end, timeNow;
+int start, end;
+float timeNow;
 
 void setup(){
   size(1000, 750);
@@ -50,9 +51,9 @@ void setup(){
   statsButton = new Button(800, 50, "Show Graph");
   showGraph = false;
   lumGraph = new ArrayList<Float>();
-  start = -10000;
-  end = 0;
-  timeNow = start;
+  start = 0;
+  end = 100000;
+  timeNow = 0;
 }
 
 void tick() {
@@ -72,7 +73,6 @@ void draw(){
     densitySlider.changed(mouseX, mouseY);
     //timeSlider.changed(mouseX, mouseY);
   }
-  tick();
   densitySlider.display();
   //solarMass = densitySlider.getValue() / 10;
   if (cloudDensity != densitySlider.getValue()){
@@ -110,19 +110,21 @@ void draw(){
   statsboard.display();
   statsButton.run2();
   time = timeSlider.getValue();
-  if (frameCount % DELAY == 0){lumGraph.add(pow(solarMass, 3.5));}
+  if (frameCount % (DELAY) == 0){lumGraph.add(pow(solarMass, 3.5));}
   if (showGraph){
-    start = (int) (time - time % 10000);
-    end = start + 10000;
-    timeNow = start;
+    //start = (int) (time - time % 10000);
+    //end = start + 10000;
   graph.graphLuminosity();
-  if (doneSetUp){
-  graph.updateGraph();
-  timeNow = timeNow + 1000;
 }
+if (doneSetUp){
+  graph.updateGraph();}
+  else if (!doneSetUp && time == 0){
+    start = 0;
+    end = 100000;
 }
+  timeNow = timeNow + 1000/DELAY;
   //Entering Red Giant phase
   
   
-  
+  tick();
 }
