@@ -6,20 +6,20 @@ class MolecularCloud{
   int radius, r1, maxNum;
   
   MolecularCloud(float density, int radius){
-    centerOfGravity = new Particle(width/2, height/2, 10, 5, false);
+    centerOfGravity = new Particle(width/2, height/2, 0, 5, false);
     this.density = density / 100;
     this.radius = radius;
     r1 = radius;
     maxNum = (int) density * 100;
     ParticleSystem = new Particle[maxNum];
     for(int i = 0; i < maxNum / 2; i++){
-      ParticleSystem[i] = new Particle(random(width/2 - 100 * random(1), width/2 + 100 * random(1)), random(height/2 - 100 * random(1), height/2 + 100 * random(1)), random(1, 3), 1, true);
+      ParticleSystem[i] = new Particle(random(width/2 - 100 * random(1), width/2 + 100 * random(1)), random(height/2 - 100 * random(1), height/2 + 100 * random(1)), random(1, 3), 1, false);
     }
     for(int i = maxNum / 2; i < 3 * maxNum/4; i++){
       ParticleSystem[i] = new Particle(random(width/2 - 200 * random(1), width/2 + 200 * random(1)), random(height/2 - 200 * random(1), height/2 + 200 * random(1)), random(1, 3), 1, true);
     }
     for(int i = 3 * maxNum/4; i < maxNum; i++){
-      ParticleSystem[i] = new Particle(random(width/2 - 250 * random(1), width/2 + 250 * random(1)), random(height/2 - 250 * random(1), height/2 + 250 * random(1)), random(1, 3), 1, true);
+      ParticleSystem[i] = new Particle(random(width/2 - 250 * random(1), width/2 + 250 * random(1)), random(height/2 - 250 * random(1), height/2 + 250 * random(1)), random(1, 3), 1, false);
     }
   }
   
@@ -28,10 +28,9 @@ class MolecularCloud{
     ParticleSystem[i].display(255, 255, 255);
   }
   }
-<<<<<<< HEAD
 void display(boolean doneSetUp){
     if(doneSetUp) {
-      centerOfGravity.display();
+      centerOfGravity.display(255, 255, 255);
       if (time <= 300000){
         if(false) {
           for (int i = 0; i < ParticleSystem.length; i++){
@@ -47,7 +46,7 @@ void display(boolean doneSetUp){
             if(doneSetUp) {        
               particle.move();
             }
-            particle.display();
+            particle.display(255, 255, 255);
             if(doneSetUp) {
               particle.applyForce(particle.attractTo(centerOfGravity));
               if(particle.checkCloseToCenter()) {
@@ -56,7 +55,10 @@ void display(boolean doneSetUp){
               }
             }
           }
-=======
+        }
+      }
+    }
+}
   
   void display(boolean doneSetUp, float r, float g, float b){
     centerOfGravity.display(r, g, b);
@@ -72,26 +74,21 @@ void display(boolean doneSetUp){
         if(particle.checkCloseToCenter()) {
           centerOfGravity.size += 0.02;
           solarMass += 0.001;
->>>>>>> 5d3ffd8a5269b9095de0bb897bc1924e3a5a1381
         }
       }
     }
   }
+  }
   
   void redGiant(boolean increase){
-<<<<<<< HEAD
-    centerOfGravity.display();
-    if (time > 300000 && time <= 400000){
-=======
     centerOfGravity.display(255, 255, 255);
-    if (time > 200000 && time <= 300000){
->>>>>>> 5d3ffd8a5269b9095de0bb897bc1924e3a5a1381
+    if (time > 300000 && time <= 400000){
       //if (frameCount % 2 == 0){
         //if (increase){increase();}
         //else{decrease();}
       //}
       increase();
-  }
+    }
   }
   
   void updateColor(int r, int g, int b){

@@ -50,8 +50,6 @@ class Particle{
       ps.run();
       if(frameCount % 5 == 0) {
          ps.addParticle();
-         ps.addParticle();
-         ps.addParticle();
       }
     }
   }
