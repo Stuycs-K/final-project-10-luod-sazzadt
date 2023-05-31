@@ -78,7 +78,7 @@ void draw(){
   
   //Display molecular cloud and sun with glow effect
   molCloud.display(doneSetUp, r, g, b);
-  sun.display(width / 2, height / 2);
+  //sun.display(width / 4, height / 2, r, g, b);
   sun.glow(width / 2, height / 2, 90);
   if (doneSetUp){
     if (densitySlider.getValue() < 80){

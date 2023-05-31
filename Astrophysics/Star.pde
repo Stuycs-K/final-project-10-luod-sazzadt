@@ -16,10 +16,12 @@ class Star {
     stroke(0);
     core = new Core(ELLIPSE, radius / 5);
   }
-  public void display(int x, int y) {
+  public void display(int x, int y, float r, float g, float b) {
     pushMatrix();
     translate(x, y);
+    fill(r, g, b);
     shape(shape);
+    noFill();
     popMatrix();
   }
   
