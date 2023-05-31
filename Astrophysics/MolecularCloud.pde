@@ -6,7 +6,7 @@ class MolecularCloud{
   int radius, r1, maxNum;
   
   MolecularCloud(float density, int radius){
-    centerOfGravity = new Particle(width/2, height/2, 0, 5, false);
+    centerOfGravity = new Particle(width/2, height/2, 10, 5, false);
     this.density = density / 100;
     this.radius = radius;
     r1 = radius;
@@ -23,42 +23,36 @@ class MolecularCloud{
     }
   }
   
+  float COGSize() {
+    return centerOfGravity.size;
+  }
+
   void display(){
     for (int i = 0; i < ParticleSystem.length; i++){
-    ParticleSystem[i].display(255, 255, 255);
+      ParticleSystem[i].display(255, 255, 255);
+    }
   }
-  }
-void display(boolean doneSetUp){
+  void display(boolean doneSetUp){
     if(doneSetUp) {
       centerOfGravity.display(255, 255, 255);
       if (time <= 300000){
-        if(false) {
-          for (int i = 0; i < ParticleSystem.length; i++){
-            Particle particle = ParticleSystem[i];
-            if(doneSetUp) {
-              particle.drawEllipse();
+        for (int i = 0; i < ParticleSystem.length; i++){
+          Particle particle = ParticleSystem[i];
+          if(doneSetUp) {        
+            particle.move();
+          }
+          particle.display(255, 255, 255);
+          if(doneSetUp) {
+            particle.applyForce(particle.attractTo(centerOfGravity));
+            if(particle.checkCloseToCenter()) {
+              centerOfGravity.size += 0.02;
+              solarMass += 0.001;
             }
           }
-        }
-        else { 
-          for (int i = 0; i < ParticleSystem.length; i++){
-            Particle particle = ParticleSystem[i];
-            if(doneSetUp) {        
-              particle.move();
-            }
-            particle.display(255, 255, 255);
-            if(doneSetUp) {
-              particle.applyForce(particle.attractTo(centerOfGravity));
-              if(particle.checkCloseToCenter()) {
-                centerOfGravity.size += 0.02;
-                solarMass += 0.001;
-              }
-            }
-          }
-        }
+        }   
       }
     }
-}
+  }
   
   void display(boolean doneSetUp, float r, float g, float b){
     centerOfGravity.display(r, g, b);

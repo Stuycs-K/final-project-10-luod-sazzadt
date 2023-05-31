@@ -34,17 +34,10 @@ class Particle{
     translate(x, y, z);
     noStroke();
     fill(r, g, b);
-    //translate(400, 400, 0);
-    //translate(x, y, z);
     noStroke();
     fill(r, g, b);
-    //sphere(size);
-    /*
-    if(x == width/2 && y == height /2) {
-      fill(255, 0, 0);
-    }
-    */
     circle(x, y, size);
+    
     if(smoky) {
       ps.applyForce(new PVector(-0.1, 0));
       ps.run();

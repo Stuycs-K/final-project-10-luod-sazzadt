@@ -15,7 +15,6 @@ class Star {
     shape = createShape(theShape, 0, 0, radius, radius);
     stroke(0);
     core = new Core(ELLIPSE, radius / 5);
-    centerOfGravity2 = new Particle(width/2, height/2, 10, 5, false);
   }
   public void display(int x, int y) {
     pushMatrix();
@@ -23,16 +22,19 @@ class Star {
     shape(shape);
     popMatrix();
   }
-  //private void expand() {
-  //  shape.scale(1.01);
-  //}
-  //private void contract() {
-  //  shape.scale(0.99);
-  //}
-  //private void rotate() {
-  //  shape.rotateY(0.01);
-  //  shape.rotateZ(0.005);
-  //}
+  
+  void glow(float x, float y, float saturation) {
+    colorMode(HSB, 360, 100, 100, 100);
+    blendMode(ADD);
+    noStroke();
+    for (float r = 0.0; r < 0.5; r += 0.01) {
+      fill(0, saturation, 5, 100);
+      circle(x, y, y * r * (radius / 20));
+    }
+    colorMode(RGB, 255, 255, 255);
+    blendMode(BLEND);
+  }
+
   public void displayData(int x, int y) {
     textSize(16);
     fill(255, 0, 0);
