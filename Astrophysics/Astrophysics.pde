@@ -4,7 +4,10 @@ Slider densitySlider;
 Slider timeSlider;
 MolecularCloud molCloud;
 Star sun;
-Button setUp;
+Button setUpButton;
+Button statsButton;
+Stats graph;
+Stats statsboard;
 
 //Global Variables
 float cloudDensity;
@@ -14,11 +17,12 @@ boolean doneSetUp = false;
 boolean timeUp = false;
 boolean beginSimulate = false;
 float solarMass;
-Stats statsboard;
 String stage;
 boolean contract;
 float r, g, b;
-ArrayDeque<Integer> lumGraph;
+ArrayList<Float> lumGraph;
+boolean showGraph;
+int start, end, timeNow;
 
 void setup(){
   size(1000, 750);
@@ -29,9 +33,9 @@ void setup(){
   cloudDensity = densitySlider.getValue();
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
-  setUp = new Button(800, 650, "Begin Simulation");
+  setUpButton = new Button(800, 650, "Begin Simulation");
   //begin = new Button(800, 680, "Begin Simulation");
-  setUp.display();
+  setUpButton.display();
   doneSetUp = false;
   solarMass = 0;
   stage = "Molecular Cloud";
@@ -42,6 +46,13 @@ void setup(){
   g = 255;
   b = 255;
   molCloud.display(doneSetUp, r, g, b);
+  graph = new Stats();
+  statsButton = new Button(800, 50, "Show Graph");
+  showGraph = false;
+  lumGraph = new ArrayList<Float>();
+  start = -10000;
+  end = 0;
+  timeNow = start;
 }
 
 void tick() {
@@ -64,8 +75,6 @@ void draw(){
   tick();
   densitySlider.display();
   //solarMass = densitySlider.getValue() / 10;
-  timeSlider.display();
-  statsboard.display();
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
     time = 0;
@@ -94,12 +103,26 @@ void draw(){
   if (timeSlider.getValue() >= 200000){
     stage = "Protostar";
   }
-  setUp.run();
-  time = timeSlider.getValue();
+  setUpButton.run();
+  statsboard.display();
   statsboard.changeStats(solarMass, stage);
+  timeSlider.display();
+  statsboard.display();
+  statsButton.run2();
+  time = timeSlider.getValue();
+  if (frameCount % DELAY == 0){lumGraph.add(pow(solarMass, 3.5));}
+  if (showGraph){
+    start = (int) (time - time % 10000);
+    end = start + 10000;
+    timeNow = start;
+  graph.graphLuminosity();
+  if (doneSetUp){
+  graph.updateGraph();
+  timeNow = timeNow + 1000;
+}
+}
   //Entering Red Giant phase
-  boolean hold = contract;
-  //molCloud.redGiant(contract);
-  //if (hold){contract = false;}
-  //else{contract = true;}
+  
+  
+  
 }

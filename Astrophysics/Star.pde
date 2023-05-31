@@ -18,10 +18,10 @@ class Star {
     centerOfGravity2 = new Particle(width/2, height/2, 10, 5, false);
   }
   public void display(int x, int y) {
-    pushMatrix();
-    translate(x, y);
-    shape(shape);
-    popMatrix();
+    //pushMatrix();
+    //translate(x, y);
+    //shape(shape);
+    //popMatrix();
   }
   //private void expand() {
   //  shape.scale(1.01);

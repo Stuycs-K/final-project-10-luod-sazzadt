@@ -87,12 +87,12 @@ class Button{
     fill(135, 118, 171);
     rect(x, y, 120, 20, 20);
     fill(215, 206, 235);
-    if (beginSimulate == false){
-      name = "Stop Simulation";
+    if (showGraph == false){
+      name = "Hide Graph";
       text(name, x + 10, y + 14);
-      beginSimulate = true;
+      showGraph = true;
     }
-    else if (beginSimulate == true){
+    else if (showGraph == true){
       name = hold;
       text(name, x + 10, y + 14);
       beginSimulate = false;

@@ -37,8 +37,10 @@ class Slider{
   boolean changed(int mousex, int mousey){
     boolean changed = false;
     if (doneSetUp == false){
-      if (mousex >= x && mousex <= x + w && mousey > y && mousey < y + h){
+      if (mousex > x && mousex < x + w && mousey > y && mousey < y + h){
       changed = true;
+    }
+    if (changed){
       valueX = mousex;
       value = map(mousex, x, x + w, min, max);
     }
@@ -51,6 +53,7 @@ class Slider{
       value += amount;
     }
   }
+  
   float getValue(){
     return value;
   }
