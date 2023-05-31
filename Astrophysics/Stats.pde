@@ -72,8 +72,10 @@ class Stats{
         for (int i = 0; i < size - 1; i++){
         float n1 = lumGraph.get(i);
         float n2 = lumGraph.get(i + 1);
+        if (showGraph){
           line(720 + (210 * (time1/100000)), 200 - ((n1/1000) * 110), 720 + (210 * (time1/100000)) + 2.1, 200 - ((n2/1000) * 110));
           time1 = time1 + 1000;
+        }
         }
       }
     }

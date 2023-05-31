@@ -35,6 +35,7 @@ void setup(){
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
   setUpButton = new Button(800, 650, "Begin Simulation");
+  sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
   //begin = new Button(800, 680, "Begin Simulation");
   setUpButton.display();
   doneSetUp = false;
@@ -67,6 +68,8 @@ void tick() {
 
 void draw(){
   background(0);
+  if (!doneSetUp){solarMass = 0;}
+  //Initialize the slider and statsboard, tick 
   cloudDensity = densitySlider.getValue();
   time = timeSlider.getValue();
   if (mousePressed){
@@ -75,16 +78,29 @@ void draw(){
   }
   densitySlider.display();
   //solarMass = densitySlider.getValue() / 10;
+  timeSlider.display();
+  statsboard.display();
+  if (mousePressed){
+    densitySlider.changed(mouseX, mouseY);
+  }
+  tick();
+  
+  //Update density, sun size based on user input 
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
     time = 0;
     timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
   }
-  //if (doneSetUp){
-  //  molCloud.display();
-  //}
-  //
+  
+  if(sun.radius != molCloud.COGSize()) {
+    sun.updateSize(molCloud.COGSize());
+  }
+  
+  
+  //Display molecular cloud and sun with glow effect
   molCloud.display(doneSetUp, r, g, b);
+  statsboard.changeStats(solarMass, stage);
+  sun.glow(width / 2, height / 2, 90 - (statsboard.luminosity/ 10));
   if (doneSetUp && time <= 200000){
   if (densitySlider.getValue() < 80){
     g = g - 0.2 * (densitySlider.getValue() / 100);
@@ -100,6 +116,8 @@ void draw(){
   //  b--;
   //  molCloud.updateColor(r, g, b);
   //}
+  //sun.display(width / 2, height / 2, r, g, b);
+  
   if (timeSlider.getValue() >= 200000){
     stage = "Protostar";
   }
@@ -122,6 +140,7 @@ if (doneSetUp){
     start = 0;
     end = 100000;
 }
+statsboard.changeStats(solarMass, stage);
   timeNow = timeNow + 1000/DELAY;
   //Entering Red Giant phase
   

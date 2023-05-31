@@ -9,6 +9,7 @@ class Particle{
   LightParticleSystem ps;
   boolean smoky;
   PImage img = loadImage("smoke.png");
+  float theta = 0;
 
   
   Particle(float x, float y, float size, float mass, boolean smoky){
@@ -22,7 +23,7 @@ class Particle{
     this.mass = mass;
     this.smoky = smoky;
     if(smoky) {
-      ps = new LightParticleSystem(0, new PVector(x, y), img);
+      ps = new LightParticleSystem(0, new PVector(x, y));
     }
   }
   
@@ -33,23 +34,14 @@ class Particle{
     translate(x, y, z);
     noStroke();
     fill(r, g, b);
-    //translate(400, 400, 0);
-    //translate(x, y, z);
     noStroke();
     fill(r, g, b);
-    //sphere(size);
-    /*
-    if(x == width/2 && y == height /2) {
-      fill(255, 0, 0);
-    }
-    */
     circle(x, y, size);
+    
     if(smoky) {
       ps.applyForce(new PVector(-0.1, 0));
       ps.run();
       if(frameCount % 5 == 0) {
-         ps.addParticle();
-         ps.addParticle();
          ps.addParticle();
       }
     }
@@ -59,6 +51,12 @@ class Particle{
     velocity.add(acceleration);
     position.add(velocity);
     acceleration.set(0, 0);
+    /*
+    if(smoky) {
+     // ps = new LightParticleSystem(0, position);
+
+    }
+    */
   }
   
   PVector attractTo(Particle other) {
@@ -83,8 +81,24 @@ class Particle{
       mass = 0;
       acceleration = new PVector(0, 0, 0);
       velocity = new PVector(0, 0, 0);
+      smoky = false;
       return true;
     }
     return false;
+  }
+    
+  void drawEllipse() {
+    pushMatrix();
+    float radiusX = 50;
+    float radiusY = 100;
+    translate(x, y);
+    theta += 0.01;
+    float posX = radiusX * cos(5 * theta );
+    float posY = radiusY * sin(5 * theta );
+    posX = posX * cos(7 * PI / 8) - posY * sin(7 * PI / 8);
+    posY = posY * cos(7 * PI / 8) + posX * sin(7 * PI / 8);
+    fill( 255 );
+    ellipse( posX, posY, size, size );
+    popMatrix();
   }
 }

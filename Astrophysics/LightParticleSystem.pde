@@ -5,12 +5,10 @@ class LightParticleSystem {
 
   ArrayList<LightParticle> lightparticles;    // An arraylist for all the particles
   PVector origin;                   // An origin point for where particles are birthed
-  PImage img;
 
-  LightParticleSystem(int num, PVector v, PImage img_) {
+  LightParticleSystem(int num, PVector v) {
     lightparticles = new ArrayList<LightParticle>();              // Initialize the arraylist
     origin = v.copy();                                   // Store the origin point
-    img = img_;
     for (int i = 0; i < num; i++) {
       lightparticles.add(new LightParticle(origin));         // Add "num" amount of particles to the arraylist
     }
