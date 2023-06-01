@@ -38,7 +38,7 @@ void setup(){
   //Initialize variables
   doneSetUp = false;
   solarMass = 0;
-  stage = "Molecular Cloud";
+  stage = "Stellar Nebula";
   contract = false;
   r = 255;
   g = 255;
@@ -84,7 +84,11 @@ void tick() {
 }
 
 void displayStage() {
-  
+  noStroke();
+  fill(215, 206, 235);
+  rect(width / 2, 30, 200, 50, 20);
+  fill(135, 118, 171);
+  text("Current Stage: \n" + stage, width / 2 + 10, 48);
 }
 
 void draw(){
@@ -140,6 +144,7 @@ void draw(){
   molCloud.display(doneSetUp, r, g, b);
   statsboard.changeStats(solarMass, stage);
   sun.glow(width / 2, height / 2, 90 - (statsboard.luminosity/ 10));
+  sun.display(width / 2, height / 2, cloudDensity);
 
           //if (time <= 200000){
           //  g--;
@@ -152,5 +157,6 @@ void draw(){
   if (timeSlider.getValue() >= 200000){
     stage = "Protostar";
   }
+  displayStage();
   
 }

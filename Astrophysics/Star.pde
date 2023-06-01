@@ -4,6 +4,7 @@ class Star {
   float mass;
   float temperature;
   Particle centerOfGravity2;
+  int starColor;
   
   public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
@@ -12,10 +13,27 @@ class Star {
     core = new Core(ELLIPSE, radius / 5);
   }
 
-  public void display(int x, int y, float r, float g, float b) {
-    fill(r, g, b);
+  public void display(int x, int y, float density) {
+    colorMode(HSB, 360, 100, 100, 100);
+    if(density < 20) {
+      starColor = 0;
+    }
+    else if(density < 40){
+      starColor = 20;
+    }
+    else if(density < 60) {
+      starColor = 60;
+    }
+    else if(density < 80) {
+      starColor = 180;
+    }
+    else {
+      starColor = 240;
+    }
+    fill(starColor, 100, 100);
     circle(x, y, radius);
     noFill();
+    colorMode(RGB, 255, 255, 255);
   }
   
   public void updateSize(float r) {
@@ -27,7 +45,7 @@ class Star {
     blendMode(ADD);
     noStroke();
     for (float r = 0.0; r < 0.5; r += 0.01) {
-      fill(0, saturation, 5, 100);
+      fill(starColor, saturation, 5, 100);
       circle(x, y, y * r * (radius / 20) * 0.5);
     }
     colorMode(RGB, 255, 255, 255);
