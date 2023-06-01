@@ -35,7 +35,10 @@ class MolecularCloud{
 
   void display(){
     for (int i = 0; i < ParticleSystem.length; i++){
-      ParticleSystem[i].display(255, 255, 255);
+      if(ParticleSystem[i].position.x == width /2 && ParticleSystem[i].position.y == height / 2) {}
+      else {
+        ParticleSystem[i].display(255, 255, 255);
+      }
     }
   }
   void display(boolean doneSetUp){
