@@ -86,9 +86,9 @@ void tick() {
 void displayStage() {
   noStroke();
   fill(215, 206, 235);
-  rect(width / 2, 30, 200, 50, 20);
+  rect(width / 2, 48, 200, 50, 20);
   fill(135, 118, 171);
-  text("Current Stage: \n" + stage, width / 2 + 10, 48);
+  text("Current Stage: \n" + stage, width / 2 + 10, 66);
 }
 
 void draw(){
@@ -143,7 +143,7 @@ void draw(){
   //Display animation
   molCloud.display(doneSetUp, r, g, b);
   statsboard.changeStats(solarMass, stage);
-  sun.glow(width / 2, height / 2, 90 - (statsboard.luminosity/ 10));
+  sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
   sun.display(width / 2, height / 2, cloudDensity);
 
           //if (time <= 200000){
@@ -154,7 +154,7 @@ void draw(){
           //sun.display(width / 2, height / 2, r, g, b);
   
   //Transition between stages
-  if (timeSlider.getValue() >= 200000){
+  if (molCloud.endStellarNeb()){
     stage = "Protostar";
   }
   displayStage();

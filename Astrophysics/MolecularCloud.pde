@@ -4,6 +4,7 @@ class MolecularCloud{
   Particle centerOfGravity;
   float density;
   int radius, r1, maxNum;
+  int absorbed = 0;
   
   MolecularCloud(float density, int radius){
     centerOfGravity = new Particle(width/2, height/2, 10, 5, false);
@@ -53,6 +54,7 @@ class MolecularCloud{
             if(particle.checkCloseToCenter()) {
               centerOfGravity.size += 0.02;
               solarMass += 0.001;
+              absorbed++;
             }
           }
         }   
@@ -74,10 +76,15 @@ class MolecularCloud{
         if(particle.checkCloseToCenter()) {
           centerOfGravity.size += 0.02;
           solarMass += 0.001;
+          absorbed++;
         }
       }
     }
   }
+  }
+  
+  boolean endStellarNeb() {
+    return (absorbed == ParticleSystem.length - 10);
   }
   
   void redGiant(boolean increase){
