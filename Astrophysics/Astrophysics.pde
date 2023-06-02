@@ -24,6 +24,7 @@ ArrayList<Float> lumGraph;
 boolean showGraph;
 int start, end;
 float timeNow;
+boolean reset;
 
 void setup(){
   size(1000, 750);
