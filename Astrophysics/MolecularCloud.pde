@@ -4,6 +4,7 @@ class MolecularCloud{
   Particle centerOfGravity;
   float density;
   int radius, r1, maxNum;
+  int absorbed = 0;
   
   MolecularCloud(float density, int radius){
     centerOfGravity = new Particle(width/2, height/2, 10, 5, false);
@@ -38,46 +39,35 @@ class MolecularCloud{
       ParticleSystem[i].display(255, 255, 255);
     }
   }
-  void display(boolean doneSetUp){
-    if(doneSetUp) {
-      centerOfGravity.display(255, 255, 255);
-      if (time <= 300000){
-        for (int i = 0; i < ParticleSystem.length; i++){
-          Particle particle = ParticleSystem[i];
-          if(doneSetUp) {        
-            particle.move();
+  
+  void display(boolean doneSetUp, float r, float g, float b, String stage){
+    if(stage.equals("Stellar Nebula") || stage.equals("Protostar")) {
+      centerOfGravity.display(r, g, b);
+      for (int i = 0; i < ParticleSystem.length; i++){
+        Particle particle = ParticleSystem[i];
+        if(doneSetUp) {        
+          particle.move();
+        }
+        particle.display(255, 255, 255);
+        if(doneSetUp) {
+          if(stage.equals("Stellar Nebula")) {
+            particle.centripetalMotion();
           }
-          particle.display(255, 255, 255);
-          if(doneSetUp) {
+          else if(stage.equals("Protostar")) {
             particle.applyForce(particle.attractTo(centerOfGravity));
             if(particle.checkCloseToCenter()) {
               centerOfGravity.size += 0.02;
               solarMass += 0.001;
+              absorbed++;
             }
           }
-        }   
-      }
-    }
-  }
-  
-  void display(boolean doneSetUp, float r, float g, float b){
-    centerOfGravity.display(r, g, b);
-    if (time <= 200000){
-    for (int i = 0; i < ParticleSystem.length; i++){
-      Particle particle = ParticleSystem[i];
-      if(doneSetUp) {        
-        particle.move();
-      }
-      particle.display(255, 255, 255);
-      if(doneSetUp) {
-        particle.applyForce(particle.attractTo(centerOfGravity));
-        if(particle.checkCloseToCenter()) {
-          centerOfGravity.size += 0.02;
-          solarMass += 0.001;
         }
       }
     }
   }
+  
+  boolean endStellarNeb() {
+    return (absorbed == ParticleSystem.length - 1);
   }
   
   void redGiant(boolean increase){

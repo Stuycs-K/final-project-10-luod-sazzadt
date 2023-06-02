@@ -16,7 +16,7 @@ int DELAY = 3;
 boolean doneSetUp = false;
 boolean timeUp = false;
 boolean beginSimulate = false;
-float solarMass;
+float solarMass = 0;
 String stage;
 boolean contract;
 float r, g, b;
@@ -27,34 +27,41 @@ float timeNow;
 
 void setup(){
   size(1000, 750);
+  
+  //Initialize Sliders
   densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
   timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
-  molCloud = new MolecularCloud(densitySlider.getValue(), 300);
-  //sun = new Star(ELLIPSE, 140, (float) (1.989 * Math.pow(10, 30)), 5772);
-  setUpButton = new Button(800, 650, "Begin Simulation");
-  sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
-  //begin = new Button(800, 680, "Begin Simulation");
-  setUpButton.display();
+  
+  //Initialize variables
   doneSetUp = false;
   solarMass = 0;
-  stage = "Molecular Cloud";
-  statsboard = new Stats(solarMass, stage);
-  statsboard.display();
+  stage = "Stellar Nebula";
   contract = false;
   r = 255;
   g = 255;
   b = 255;
-  molCloud.display(doneSetUp, r, g, b);
-  graph = new Stats();
-  statsButton = new Button(800, 50, "Show Graph");
-  showGraph = false;
-  lumGraph = new ArrayList<Float>();
   start = 0;
   end = 100000;
   timeNow = 0;
+  showGraph = false;
+  lumGraph = new ArrayList<Float>();
+  
+  //Initialize Objects
+  molCloud = new MolecularCloud(densitySlider.getValue(), 300);
+  setUpButton = new Button(800, 650, "Begin Simulation");
+  sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
+  statsboard = new Stats(solarMass, stage);
+  graph = new Stats();
+  statsButton = new Button(800, 50, "Show Graph");
+  //begin = new Button(800, 680, "Begin Simulation");
+  
+  //Initial Methods
+  setUpButton.display();
+  statsboard.display();
+  molCloud.display(doneSetUp, r, g, b, stage);
 }
 
 void tick() {
@@ -68,82 +75,71 @@ void tick() {
 
 void draw(){
   background(0);
-  if (!doneSetUp){solarMass = 0;}
-  //Initialize the slider and statsboard, tick 
+    
+  //Update time and cloud density, display information
   cloudDensity = densitySlider.getValue();
   time = timeSlider.getValue();
-  if (mousePressed){
-    densitySlider.changed(mouseX, mouseY);
-    //timeSlider.changed(mouseX, mouseY);
-  }
   densitySlider.display();
-  //solarMass = densitySlider.getValue() / 10;
   timeSlider.display();
   statsboard.display();
-  if (mousePressed){
-    densitySlider.changed(mouseX, mouseY);
-  }
-  tick();
-  
-  //Update density, sun size based on user input 
-  if (cloudDensity != densitySlider.getValue()){
-    molCloud = new MolecularCloud(densitySlider.getValue(), 300);
-    time = 0;
-    timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
-  }
-  
-  if(sun.radius != molCloud.COGSize()) {
-    sun.updateSize(molCloud.COGSize());
-  }
-  
-  
-  //Display molecular cloud and sun with glow effect
-  molCloud.display(doneSetUp, r, g, b);
-  statsboard.changeStats(solarMass, stage);
-  sun.glow(width / 2, height / 2, 90 - (statsboard.luminosity/ 10));
-  if (doneSetUp && time <= 200000){
-  if (densitySlider.getValue() < 80){
-    g = g - 0.2 * (densitySlider.getValue() / 100);
-    b = b - 0.2 * (densitySlider.getValue() / 100);
-  }
-  else if (densitySlider.getValue() >= 80){
-   r = r - 0.2 * (densitySlider.getValue() / 100);
-   g = g - 0.2 * (densitySlider.getValue() / 100);
-  }
-  }
-  //if (time <= 200000){
-  //  g--;
-  //  b--;
-  //  molCloud.updateColor(r, g, b);
-  //}
-  //sun.display(width / 2, height / 2, r, g, b);
-  
-  if (timeSlider.getValue() >= 200000){
-    stage = "Protostar";
-  }
   setUpButton.run();
   statsboard.display();
   statsboard.changeStats(solarMass, stage);
   timeSlider.display();
   statsboard.display();
   statsButton.run2();
-  time = timeSlider.getValue();
-  if (frameCount % (DELAY) == 0){lumGraph.add(pow(solarMass, 3.5));}
+  tick();
+  
+  //Monitor user input, update variables, update graph
+  if (!doneSetUp){
+    solarMass = 0;
+  }
+  if (mousePressed){
+    densitySlider.changed(mouseX, mouseY);
+  }
+  if (cloudDensity != densitySlider.getValue()){
+    molCloud = new MolecularCloud(densitySlider.getValue(), 300);
+    time = 0;
+    timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
+  }
+  if(sun.radius != molCloud.COGSize()) {
+    sun.updateSize(molCloud.COGSize());
+  }
+  if (frameCount % (DELAY) == 0){
+    lumGraph.add(pow(solarMass, 3.5));
+  }
   if (showGraph){
     //start = (int) (time - time % 10000);
     //end = start + 10000;
-  graph.graphLuminosity();
-}
-if (doneSetUp){
-  graph.updateGraph();}
+    graph.graphLuminosity();
+  }
+  if (doneSetUp){
+    graph.updateGraph();
+  }
   else if (!doneSetUp && time == 0){
     start = 0;
     end = 100000;
-}
-statsboard.changeStats(solarMass, stage);
+  }
   timeNow = timeNow + 1000/DELAY;
-  //Entering Red Giant phase
   
+  //Display animation
+  molCloud.display(doneSetUp, r, g, b, stage);
+  statsboard.changeStats(solarMass, stage);
+  sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
+  sun.display(width / 2, height / 2, cloudDensity);
+
+          //if (time <= 200000){
+          //  g--;
+          //  b--;
+          //  molCloud.updateColor(r, g, b);
+          //}
+          //sun.display(width / 2, height / 2, r, g, b);
   
-  tick();
+  //Transition between stages
+  if(time == 150000) {
+    stage = "Protostar";
+  }
+  if (molCloud.endStellarNeb()){
+    stage = "Main Sequence Star";
+  }
 }

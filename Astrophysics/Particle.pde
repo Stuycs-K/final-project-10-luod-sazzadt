@@ -10,6 +10,9 @@ class Particle{
   boolean smoky;
   PImage img = loadImage("smoke.png");
   float theta = 0;
+  float v = (float) (Math.random() * 360);
+  float angle;
+  float circleRadius;
 
   
   Particle(float x, float y, float size, float mass, boolean smoky){
@@ -19,6 +22,8 @@ class Particle{
     position = new PVector(x, y, z);
     velocity = new PVector(0, 0, 0);
     acceleration = new PVector(0, 0, 0);
+    angle = atan2(width / 2 - position.x, height / 2 - position.y);
+    circleRadius = dist(width / 2, height / 2, position.x, position.y);
     this.size = size;
     this.mass = mass;
     this.smoky = smoky;
@@ -37,7 +42,6 @@ class Particle{
     noStroke();
     fill(r, g, b);
     circle(x, y, size);
-    
     if(smoky) {
       ps.applyForce(new PVector(-0.1, 0));
       ps.run();
@@ -67,6 +71,12 @@ class Particle{
     force.normalize();
     force.mult((float) mag);
     return force;
+  }
+  
+  void centripetalMotion() {
+    position.x = width / 2 + cos(angle) * circleRadius;
+    position.y = height / 2 + sin(angle) * circleRadius;
+    angle += PI/v;
   }
   
   void applyForce(PVector f) {
