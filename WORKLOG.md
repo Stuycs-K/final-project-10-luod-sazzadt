@@ -22,6 +22,28 @@ Created the stats class to display the numerical information about the character
 
 Changed up the display of stats and the star so they are true to real science. Began working on simulating the red giant branch.
 
+### 5/27/23
+
+Gathered astronomical formulas to calculate the characteristics of the star (luminosity, radius, temperature, etc.) and updated them in the Stats class.
+
+### 5/28/23
+
+Added color to the star so the color changes as the star grows bigger. However, the color is uniform for all densities.
+
+### 5/29/23
+
+Added different colors for different initial densities based on stellar classifications (OBAGBKM, meaning that different temperatures and masses indicate different colors the star appears to be).
+
+### 5/31/23
+
+Began creating the luminosity graph, which constantly updates and plots the luminosity as the star life cycle progresses.
+
+### 6/1/23
+
+Fixed the luminosity graph so that it starts and ends at the right place. Additionally, the scale of the luminosity graph automatically updates if the previous scale is exceeded.
+
+Fixed the setup button so that it resets the simulation even if the molecular cloud density is unchanged (previously, resetting only works if the user manually changes the molecular cloud density).
+
 ## Tazrian Sazzad
 
 ### 5/22/23
