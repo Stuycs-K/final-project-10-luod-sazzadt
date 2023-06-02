@@ -7,9 +7,9 @@ class Stats{
   
   Stats(float mass, String stage){
     this.mass = mass;
-    this.radius = mass;
+    this.radius = mass * (6.957 * pow(10, 8));
     this.luminosity = pow(mass, 3.5);
-    this.temp = pow((pow(mass, 3.5) / pow(mass, 2)), 0.25);
+    this.temp = pow(this.luminosity / pow(mass, 2), 0.25) * 5772;
     this.stage = stage;
   }
   
@@ -19,7 +19,7 @@ class Stats{
     rect(50, 50, 290, 100, 20);
     fill(135, 118, 171);
     text("Solar Mass: " + mass, 70, 75);
-    text("Temperature: " + temp, 70, 95);
+    text("Temperature (in Kelvin): " + temp, 70, 95);
     text("Luminosity (compared to the Sun): " + luminosity, 70, 115);
     text("Stage: " + stage, 70, 135);
   }
@@ -31,7 +31,15 @@ class Stats{
     this.temp = pow((pow(mass, 3.5) / pow(mass, 2)), 0.25);
     this.stage = stage;
   }
-  
+ 
+  void resetStats(){
+    this.mass = 0;
+    this.radius = 0;
+    this.luminosity = 0;
+    this.temp = 0;
+    this.stage = "Molecular Cloud";
+  }
+     
   float calcLum(float mass){
     return pow((pow(mass, 3.5) / pow(mass, 2)), 0.25);
   }

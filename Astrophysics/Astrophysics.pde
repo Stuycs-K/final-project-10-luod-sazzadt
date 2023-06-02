@@ -41,6 +41,7 @@ void setup(){
   solarMass = 0;
   stage = "Stellar Nebula";
   contract = false;
+  reset = false;
   r = 255;
   g = 255;
   b = 255;
@@ -95,6 +96,9 @@ void draw(){
   if (!doneSetUp){
     solarMass = 0;
   }
+  if (doneSetUp && time <= 150000){
+    solarMass += 0.001;
+  }
   if (mousePressed){
     densitySlider.changed(mouseX, mouseY);
   }
@@ -105,6 +109,14 @@ void draw(){
   }
   if(sun.radius != molCloud.COGSize()) {
     sun.updateSize(molCloud.COGSize());
+  }
+  
+  if (reset && cloudDensity == densitySlider.getValue()){
+    molCloud = new MolecularCloud(densitySlider.getValue(), 300);
+    time = 0;
+    timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
+    reset = false;
+    statsboard.resetStats();
   }
   if (frameCount % (DELAY) == 0){
     lumGraph.add(pow(solarMass, 3.5));

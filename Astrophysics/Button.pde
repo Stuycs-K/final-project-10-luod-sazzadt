@@ -54,6 +54,7 @@ class Button{
           name = hold;
           text(name, x + 10, y + 14);
           doneSetUp = false;
+          reset = true;
         }
       }
     }
