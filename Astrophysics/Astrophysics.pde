@@ -61,7 +61,7 @@ void setup(){
   //Initial Methods
   setUpButton.display();
   statsboard.display();
-  molCloud.display(doneSetUp, r, g, b);
+  molCloud.display(doneSetUp, r, g, b, stage);
 }
 
 void tick() {
@@ -71,24 +71,6 @@ void tick() {
       }
     time = timeSlider.getValue();
   }
-  if (doneSetUp && time <= 200000){
-    if (densitySlider.getValue() < 80){
-      g = g - 0.2 * (densitySlider.getValue() / 100);
-      b = b - 0.2 * (densitySlider.getValue() / 100);
-    }
-    else if (densitySlider.getValue() >= 80){
-     r = r - 0.2 * (densitySlider.getValue() / 100);
-     g = g - 0.2 * (densitySlider.getValue() / 100);
-    }
-  }
-}
-
-void displayStage() {
-  noStroke();
-  fill(215, 206, 235);
-  rect(width / 2, 48, 200, 50, 20);
-  fill(135, 118, 171);
-  text("Current Stage: \n" + stage, width / 2 + 10, 66);
 }
 
 void draw(){
@@ -100,13 +82,13 @@ void draw(){
   densitySlider.display();
   timeSlider.display();
   statsboard.display();
-  tick();
   setUpButton.run();
   statsboard.display();
   statsboard.changeStats(solarMass, stage);
   timeSlider.display();
   statsboard.display();
   statsButton.run2();
+  tick();
   
   //Monitor user input, update variables, update graph
   if (!doneSetUp){
@@ -141,7 +123,7 @@ void draw(){
   timeNow = timeNow + 1000/DELAY;
   
   //Display animation
-  molCloud.display(doneSetUp, r, g, b);
+  molCloud.display(doneSetUp, r, g, b, stage);
   statsboard.changeStats(solarMass, stage);
   sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
   sun.display(width / 2, height / 2, cloudDensity);
@@ -154,9 +136,10 @@ void draw(){
           //sun.display(width / 2, height / 2, r, g, b);
   
   //Transition between stages
-  if (molCloud.endStellarNeb()){
+  if(time == 150000) {
     stage = "Protostar";
   }
-  displayStage();
-  
+  if (molCloud.endStellarNeb()){
+    stage = "Main Sequence Star";
+  }
 }
