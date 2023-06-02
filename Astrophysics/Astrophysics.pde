@@ -22,9 +22,10 @@ boolean contract;
 float r, g, b;
 ArrayList<Float> lumGraph;
 boolean showGraph;
-int start, end;
+int start, end, start2, end2;
 float timeNow;
 boolean reset;
+float timeWhenClicked;
 
 void setup(){
   size(1000, 750);
@@ -47,8 +48,11 @@ void setup(){
   b = 255;
   start = 0;
   end = 100000;
+  start2 = 0;
+  end2 = 1000;
   timeNow = 0;
   showGraph = false;
+  timeWhenClicked = 0;
   lumGraph = new ArrayList<Float>();
   
   //Initialize Objects
@@ -90,14 +94,13 @@ void draw(){
   timeSlider.display();
   statsboard.display();
   statsButton.run2();
-  tick();
   
   //Monitor user input, update variables, update graph
   if (!doneSetUp){
     solarMass = 0;
   }
   if (doneSetUp && time <= 150000){
-    solarMass += 0.001;
+    solarMass += 0.007;
   }
   if (mousePressed){
     densitySlider.changed(mouseX, mouseY);
@@ -110,30 +113,6 @@ void draw(){
   if(sun.radius != molCloud.COGSize()) {
     sun.updateSize(molCloud.COGSize());
   }
-  
-  if (reset && cloudDensity == densitySlider.getValue()){
-    molCloud = new MolecularCloud(densitySlider.getValue(), 300);
-    time = 0;
-    timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
-    reset = false;
-    statsboard.resetStats();
-  }
-  if (frameCount % (DELAY) == 0){
-    lumGraph.add(pow(solarMass, 3.5));
-  }
-  if (showGraph){
-    //start = (int) (time - time % 10000);
-    //end = start + 10000;
-    graph.graphLuminosity();
-  }
-  if (doneSetUp){
-    graph.updateGraph();
-  }
-  else if (!doneSetUp && time == 0){
-    start = 0;
-    end = 100000;
-  }
-  timeNow = timeNow + 1000/DELAY;
   
   //Display animation
   molCloud.display(doneSetUp, r, g, b, stage);
@@ -154,5 +133,47 @@ void draw(){
   }
   if (molCloud.endStellarNeb()){
     stage = "Main Sequence Star";
+  }
+  
+  //Update time
+  tick();
+  if (doneSetUp && frameCount % DELAY == 0){
+    lumGraph.add(pow(solarMass, 3.5));
+  }
+  if (time == 0 && doneSetUp){lumGraph.add(pow(solarMass, 3.5));}
+  if (showGraph){
+    graph.graphLuminosity();
+  }
+  if (doneSetUp){
+    graph.updateGraph();
+  }
+  else if (!doneSetUp && time == 0){
+    start = 0;
+    end = 100000;
+    start2 = 0;
+    end2 = 1000;
+  }
+  if (reset){
+    start = 0;
+    end = 100000;
+    start2 = 0;
+    end2 = 1000;
+  }
+  timeNow = timeSlider.getValue();
+  
+  if (reset && cloudDensity == densitySlider.getValue()){
+    sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
+    molCloud = new MolecularCloud(densitySlider.getValue(), 300);
+    time = 0;
+    timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
+    reset = false;
+    statsboard.resetStats();
+    start = 0;
+    end = 100000;
+    start2 = 0;
+    end2 = 1000;
+    timeNow = 0;
+    graph.remakeGraph();
+    graph.updateGraph();
   }
 }

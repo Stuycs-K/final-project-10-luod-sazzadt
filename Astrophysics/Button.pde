@@ -90,6 +90,7 @@ class Button{
         }
       }
       if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+        lastPressed = frameCount;
       noStroke();
     fill(135, 118, 171);
     rect(x, y, 120, 20, 20);

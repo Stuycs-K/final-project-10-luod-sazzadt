@@ -28,7 +28,7 @@ class Stats{
     this.mass = mass;
     this.radius = mass;
     this.luminosity = pow(mass, 3.5);
-    this.temp = pow((pow(mass, 3.5) / pow(mass, 2)), 0.25);
+    this.temp = pow(this.luminosity / pow(mass, 2), 0.25) * 5772;
     this.stage = stage;
   }
  
@@ -44,8 +44,7 @@ class Stats{
     return pow((pow(mass, 3.5) / pow(mass, 2)), 0.25);
   }
   
-  Stats(){
-  }
+  Stats(){}
   
   void graphLuminosity(){
     noStroke();
@@ -57,18 +56,36 @@ class Stats{
     fill(135, 118, 171);
     text("Luminosity vs. Time", 700 + 70, 220);
     fill(135, 118, 171);
-    text("0", 712, 201);
-    text("1000", 694, 98);
+    text(start2, 694, 201);
+    text(end2, 694, 98);
     text(start, 718, 212);
     text(end, 905, 212);
   }
   
   void updateGraph(){
     if (lumGraph.size() >= 2){
-      if (timeNow >= 99999){
+      if (timeNow >= end && lumGraph.get(lumGraph.size() - 1) >= end2){
         start = end;
         end = end + 100000;
-        timeNow = 0;
+        start2 = end2;
+        end2 = end2 + 1000;
+        //timeNow = 0;
+        remakeGraph();
+        updateGraph();
+        return;
+      }
+      else if (timeNow >= end){
+        start = end;
+        end = end + 100000;
+        //timeNow = 0;
+        remakeGraph();
+        updateGraph();
+        return;
+      }
+      else if (lumGraph.get(lumGraph.size() - 1) >= end2){
+        start2 = end2;
+        end2 = end2 + 1000;
+        //timeNow = 0;
         remakeGraph();
         updateGraph();
         return;
@@ -76,12 +93,12 @@ class Stats{
       else{
         int size = lumGraph.size();
         float time1 = 0;
-        stroke(135, 118, 171);
         for (int i = 0; i < size - 1; i++){
         float n1 = lumGraph.get(i);
         float n2 = lumGraph.get(i + 1);
         if (showGraph){
-          line(720 + (210 * (time1/100000)), 200 - ((n1/1000) * 110), 720 + (210 * (time1/100000)) + 2.1, 200 - ((n2/1000) * 110));
+          stroke(135, 118, 171);
+          line(720 + (210 * (time1/100000)), 200 - ((n1/end2) * 110), 720 + (210 * (time1/100000)) + 2.1, 200 - ((n2/end2) * 110));
           time1 = time1 + 1000;
         }
         }
@@ -100,8 +117,8 @@ class Stats{
     fill(135, 118, 171);
     text("Luminosity vs. Time", 700 + 70, 220);
     fill(135, 118, 171);
-    text("0", 712, 201);
-    text("1000", 694, 98);
+    text(start2, 694, 201);
+    text(end2, 694, 98);
     text(start, 718, 212);
     text(end, 905, 212);
   }
