@@ -44,3 +44,12 @@ Created timeline slider that updates based on frameCount, resets whenever the de
 Implemented gravitational attraction between particles and a "center of gravity," works for all densities and with the rate easily changeable.
 Simulated growth of star core dependent on how many molecules collapse into the center.
 Tried to fix super laggy light effect (not successful)
+
+### 5/26/23
+Fixed light effect lagginess, created basic glow effect for the star using HSB colorMode, started basic circular motion of particles in protostar phase using rotate.
+
+### 5/31/23
+Saturation of glow method changes based on luminosity values, different densities now result in different hues(colors).
+
+### 6/1/23
+Transition from protostar to main sequence star phase happens when all particles absorbed by center of gravity. Centripetal motion of particles in stellar nebula phase works as intended now.
