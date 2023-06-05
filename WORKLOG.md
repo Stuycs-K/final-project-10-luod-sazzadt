@@ -44,6 +44,9 @@ Fixed the luminosity graph so that it starts and ends at the right place. Additi
 
 Fixed the setup button so that it resets the simulation even if the molecular cloud density is unchanged (previously, resetting only works if the user manually changes the molecular cloud density).
 
+### 6/4/23
+Added colors to the main sequence stage so that the vibrance of the color decreases (becomes more pale) as the star fuses more atoms.
+
 ## Tazrian Sazzad
 
 ### 5/22/23
