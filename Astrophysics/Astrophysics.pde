@@ -120,7 +120,8 @@ void draw(){
   molCloud.display(doneSetUp, r, g, b, stage);
   statsboard.changeStats(solarMass, stage);
   sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
-  sun.display(width / 2, height / 2, cloudDensity);
+  if (time <= 300000){
+  sun.display(width / 2, height / 2, cloudDensity);}
 
           //if (time <= 200000){
           //  g--;

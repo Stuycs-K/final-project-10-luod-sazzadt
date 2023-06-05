@@ -102,6 +102,7 @@ class Star {
   }
   
   void display2(int x, int y, float r, float g, float b){
+    colorMode(RGB, 255, 255, 255);
     noStroke();
     fill(r, g, b);
     circle(x, y, radius);
@@ -124,6 +125,7 @@ class Star {
           b2 = b2 + 0.5;
         }
         display2(width / 2, height / 2, r2, g2, b2);
+        //solarMass += 0.5;
   }
   }
 
