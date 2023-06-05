@@ -5,6 +5,7 @@ class Star {
   float temperature;
   Particle centerOfGravity2;
   int starColor;
+  float r2, g2, b2;
   
   public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
@@ -17,18 +18,33 @@ class Star {
     colorMode(HSB, 360, 100, 100, 100);
     if(density < 20) {
       starColor = 0;
+      r2 = 255;
+      g2 = 0;
+      b2 = 0;
     }
     else if(density < 40){
       starColor = 20;
+      r2 = 255;
+      g2 = 85;
+      b2 = 0;
     }
     else if(density < 60) {
       starColor = 60;
+      r2 = 255;
+      g2 = 255;
+      b2 = 0;
     }
     else if(density < 80) {
       starColor = 180;
+      r2 = 0;
+      g2 = 255;
+      b2 = 255;
     }
     else {
       starColor = 240;
+      r2 = 0;
+      g2 = 0;
+      b2 = 255;
     }
     fill(starColor, 100, 100);
     circle(x, y, radius);
@@ -84,4 +100,31 @@ class Star {
       }
     }
   }
+  
+  void display2(int x, int y, float r, float g, float b){
+    noStroke();
+    fill(r, g, b);
+    circle(x, y, radius);
   }
+  
+  void mainSequenceColor(){
+    if (time > 300000 && time < 4300000){
+        if (densitySlider.getValue() < 40){
+          g2 = g2 + 0.5;
+          b2 = b2 + 0.5;
+        }
+        else if (densitySlider.getValue() < 60){
+          b2 = b2 + 0.5;
+        }
+        else if (densitySlider.getValue() < 80){
+          r2 = r2 + 0.5;
+        }
+        else{
+          r2 = r2 + 0.5;
+          b2 = b2 + 0.5;
+        }
+        display2(width / 2, height / 2, r2, g2, b2);
+  }
+  }
+
+}

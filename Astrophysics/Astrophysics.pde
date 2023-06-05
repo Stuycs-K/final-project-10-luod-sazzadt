@@ -26,6 +26,7 @@ int start, end, start2, end2;
 float timeNow;
 boolean reset;
 float timeWhenClicked;
+boolean darker;
 
 void setup(){
   size(1000, 750);
@@ -54,6 +55,7 @@ void setup(){
   showGraph = false;
   timeWhenClicked = 0;
   lumGraph = new ArrayList<Float>();
+  darker = false;
   
   //Initialize Objects
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
@@ -176,4 +178,6 @@ void draw(){
     graph.remakeGraph();
     graph.updateGraph();
   }
+  time = timeSlider.getValue();
+  sun.mainSequenceColor();
 }
