@@ -8,6 +8,8 @@ Button setUpButton;
 Button statsButton;
 Stats graph;
 Stats statsboard;
+Button infoButton;
+Stats infoboard;
 
 //Global Variables
 float cloudDensity;
@@ -27,6 +29,7 @@ float timeNow;
 boolean reset;
 float timeWhenClicked;
 boolean darker;
+boolean showInfo;
 
 void setup(){
   size(1000, 750);
@@ -56,6 +59,7 @@ void setup(){
   timeWhenClicked = 0;
   lumGraph = new ArrayList<Float>();
   darker = false;
+  showInfo = false;
   
   //Initialize Objects
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
@@ -64,7 +68,8 @@ void setup(){
   statsboard = new Stats(solarMass, stage);
   graph = new Stats();
   statsButton = new Button(800, 50, "Show Graph");
-  //begin = new Button(800, 680, "Begin Simulation");
+  infoButton = new Button(50, 170, "Learn More");
+  infoboard = new Stats();
   
   //Initial Methods
   setUpButton.display();
@@ -96,6 +101,7 @@ void draw(){
   timeSlider.display();
   statsboard.display();
   statsButton.run2();
+  infoButton.run3();
   
   //Monitor user input, update variables, update graph
   if (!doneSetUp){
@@ -122,13 +128,6 @@ void draw(){
   sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
   if (time <= 300000){
   sun.display(width / 2, height / 2, cloudDensity);}
-
-          //if (time <= 200000){
-          //  g--;
-          //  b--;
-          //  molCloud.updateColor(r, g, b);
-          //}
-          //sun.display(width / 2, height / 2, r, g, b);
   
   //Transition between stages
   if(time == 150000) {
@@ -163,6 +162,10 @@ void draw(){
     end2 = 1000;
   }
   timeNow = timeSlider.getValue();
+  
+  if (showInfo){
+    infoboard.displayInfo();
+  }
   
   if (reset && cloudDensity == densitySlider.getValue()){
     sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);

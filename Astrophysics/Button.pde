@@ -113,4 +113,45 @@ class Button{
     display();
     update2();
   }
+  
+  void update3(){
+    if (!(mousePressed)){
+    if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    text(name, x + 10, y + 14);
+    }
+    }
+    else if (mousePressed){
+      if(lastPressed > 0) {
+        if(frameCount - lastPressed < 35) {
+          return;
+        }
+      }
+      if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+        lastPressed = frameCount;
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    if (showInfo == false){
+      name = "Hide Info";
+      text(name, x + 10, y + 14);
+      showInfo = true;
+    }
+    else if (showInfo == true){
+      name = hold;
+      text(name, x + 10, y + 14);
+      showInfo = false;
+    }
+    }
+    }
+  }  
+  
+  void run3(){
+    display();
+    update3();
+  }
 }
