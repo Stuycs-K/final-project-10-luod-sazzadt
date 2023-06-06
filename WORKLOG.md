@@ -47,6 +47,9 @@ Fixed the setup button so that it resets the simulation even if the molecular cl
 ### 6/4/23
 Added colors to the main sequence stage so that the vibrance of the color decreases (becomes more pale) as the star fuses more atoms.
 
+### 6/5/23
+Created a new button to display the information about the current stage. Added a method to the Stats class that will show the information when the button is clicked.
+
 ## Tazrian Sazzad
 
 ### 5/22/23
