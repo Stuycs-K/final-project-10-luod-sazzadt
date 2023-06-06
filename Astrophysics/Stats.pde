@@ -4,6 +4,9 @@ class Stats{
   float luminosity;
   String stage;
   float radius;
+  String[] stageInfo = new String[]
+  {"The molecular cloud is the initial stage of the birth of a star. As its temperature and pressure increase, a fragment condenses into a rotating sphere of superhot gas known as a protostar.",
+  "After 10^6 years, a dense, hot core of the size of Mercury's orbit called the protostar is formed. However, the core temperature is still not hot enough for nuclear fusion to occur."};
   
   Stats(float mass, String stage){
     this.mass = mass;
@@ -121,6 +124,15 @@ class Stats{
     text(end2, 694, 98);
     text(start, 718, 212);
     text(end, 905, 212);
+  }
+  
+  void displayInfo(){
+    int h = (stageInfo[0].length() / 18) * 20;
+    noStroke();
+    fill(215, 206, 235);
+    rect(50, 200, 150, h, 20);
+    fill(135, 118, 171);
+    text(stageInfo[0], 60, 208, 130, 250);
   }
  }
  
