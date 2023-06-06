@@ -181,6 +181,7 @@ void draw(){
     timeNow = 0;
     graph.remakeGraph();
     graph.updateGraph();
+    stage = "Molecular Cloud";
   }
   time = timeSlider.getValue();
   sun.mainSequenceColor();

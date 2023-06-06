@@ -5,7 +5,7 @@ class Stats{
   String stage;
   float radius;
   String[] stageInfo = new String[]
-  {"The molecular cloud is the initial stage of the birth of a star. As its temperature and pressure increase, a fragment condenses into a rotating sphere of superhot gas known as a protostar.",
+  {"The stellar nebula is the molecular cloud that makes up initial stage of the birth of a star. As its temperature and pressure increase, a fragment condenses into a rotating sphere of superhot gas known as a protostar.",
   "After 10^6 years, a dense, hot core of the size of Mercury's orbit called the protostar is formed. However, the core temperature is still not hot enough for nuclear fusion to occur."};
   
   Stats(float mass, String stage){
