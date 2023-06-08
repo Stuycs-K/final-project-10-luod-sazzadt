@@ -122,7 +122,7 @@ class Star {
         }
         else{
           r2 = r2 + 0.5;
-          b2 = b2 + 0.5;
+          g2 = g2 + 0.5;
         }
         display2(width / 2, height / 2, r2, g2, b2);
         //solarMass += 0.5;

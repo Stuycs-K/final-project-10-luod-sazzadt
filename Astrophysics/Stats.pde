@@ -103,11 +103,9 @@ class Stats{
         for (int i = 0; i < size - 1; i++){
         float n1 = lumGraph.get(i);
         float n2 = lumGraph.get(i + 1);
-        if (showGraph){
-          stroke(135, 118, 171);
-          line(720 + (210 * (time1/100000)), 200 - ((n1/end2) * 110), 720 + (210 * (time1/100000)) + 2.1, 200 - ((n2/end2) * 110));
-          time1 = time1 + 1000;
-        }
+        stroke(135, 118, 171);
+        line(720 + (210 * (time1/100000)), 200 - ((n1/end2) * 110), 720 + (210 * (time1/100000)) + 2.1, 200 - ((n2/end2) * 110));
+        time1 = time1 + 1000;
         }
       }
     }
