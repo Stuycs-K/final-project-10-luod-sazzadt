@@ -23,23 +23,23 @@ class Particle{
   }
   
   void changeposition(){
-    z = z - 15;
-    if (z < 1){
-      z1 = z;
+    hz = hz - 15;
+    if (hz < 1){
+      z1 = hz;
     }
   }
   
   void display2(){
-    x1 = map(hx/z, 0, 1, 0, width);
-    y1 = map(hy/z, 0, 1, 0, height);
+    x1 = map(hx/hz, 0, 1, 0, width);
+    y1 = map(hy/hz, 0, 1, 0, height);
     
-    starradius = map(z, 0, width, 5, 0);
+    starradius = map(hz, 0, width, 5, 0);
     
     x2 = map(hx/z1, 0, 1, 0, width);
     y2 = map(hy/z1, 0, 1, 0, height);
     
     noFill();
-    stroke(map(z, 0, width, 300, 150));
+    stroke(map(hz, 0, width, 300, 150));
     line(x2, y2, x1, y1);
     
     fill(255);
@@ -51,9 +51,9 @@ class Particle{
   void reset(){
     hx = random(-width, width);
     hy = random(-height, height);
-    z = width;
+    hz = width;
     starradius = 0.2;
-    z1 = z;
+    z1 = hz;
   }
   
   Particle(float x, float y, float size, float mass, boolean smoky){

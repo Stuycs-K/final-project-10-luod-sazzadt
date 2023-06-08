@@ -18,7 +18,7 @@ class MolecularCloud{
       introstars[i].changeposition();
       introstars[i].display2();
       
-      if (introstars[i].z < 1){
+      if (introstars[i].hz < 1){
         introstars[i].reset();
       }
     }
