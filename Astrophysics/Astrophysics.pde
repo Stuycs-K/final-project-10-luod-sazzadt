@@ -1,7 +1,9 @@
 import java.util.*;
 //Created Objects
+Button play;
 Slider densitySlider;
 Slider timeSlider;
+MolecularCloud intro;
 MolecularCloud molCloud;
 Star sun;
 Button setUpButton;
@@ -9,8 +11,10 @@ Stats graph;
 Stats statsboard;
 Button infoButton;
 Stats infoboard;
+PImage img;
 
 //Global Variables
+boolean startPlay = false;
 float cloudDensity;
 float time = 0;
 int DELAY = 3;
@@ -32,7 +36,8 @@ boolean showInfo;
 
 void setup(){
   size(1000, 750);
-  
+  intro = new MolecularCloud();
+  img = loadImage("astrotitle.png");
   //Initialize Sliders
   densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
@@ -41,6 +46,7 @@ void setup(){
   cloudDensity = densitySlider.getValue();
   
   //Initialize variables
+  startPlay = false;
   doneSetUp = false;
   solarMass = 0;
   stage = "Stellar Nebula";
@@ -61,6 +67,7 @@ void setup(){
   showInfo = false;
   
   //Initialize Objects
+  play = new Button(width/2 - 60, height/2 + 150, "START");
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   setUpButton = new Button(800, 650, "Begin Simulation");
   sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
@@ -70,9 +77,9 @@ void setup(){
   infoboard = new Stats();
   
   //Initial Methods
-  setUpButton.display();
-  statsboard.display();
-  molCloud.display(doneSetUp, r, g, b, stage);
+  //setUpButton.display();
+  //statsboard.display();
+  //molCloud.display(doneSetUp, r, g, b, stage);
 }
 
 void tick() {
@@ -86,6 +93,14 @@ void tick() {
 
 void draw(){
   background(0);
+  if (startPlay == false){
+    translate(width/2, height/2);
+    intro.display2();
+    translate(-width/2, -height/2);
+    image(img, width/2 - (width * 0.85)/2, height/2 - (height * 0.55)/2, width * 0.85, height * 0.55);
+    play.run2();
+  }
+  else{
   
   //Monitor user input, update variables, update graph
   if (!doneSetUp){
@@ -185,5 +200,11 @@ void draw(){
   graph.graphLuminosity();
   if (doneSetUp){
     graph.updateGraph();
+  }
+  
+  
+  
+  
+  
   }
 }

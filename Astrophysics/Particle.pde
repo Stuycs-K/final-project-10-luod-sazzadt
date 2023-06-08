@@ -13,7 +13,48 @@ class Particle{
   float v = (float) (Math.random() * 360);
   float angle;
   float circleRadius;
-
+  
+  float hx, hy, hz, z1,x1, x2, y1, y2, starradius;
+  
+  Particle(){
+    this.hx = random(-width, width);
+    this.hy = random(-height, height);
+    this.hz = random(0, width);
+  }
+  
+  void changeposition(){
+    z = z - 15;
+    if (z < 1){
+      z1 = z;
+    }
+  }
+  
+  void display2(){
+    x1 = map(hx/z, 0, 1, 0, width);
+    y1 = map(hy/z, 0, 1, 0, height);
+    
+    starradius = map(z, 0, width, 5, 0);
+    
+    x2 = map(hx/z1, 0, 1, 0, width);
+    y2 = map(hy/z1, 0, 1, 0, height);
+    
+    noFill();
+    stroke(map(z, 0, width, 300, 150));
+    line(x2, y2, x1, y1);
+    
+    fill(255);
+    noStroke();
+    circle(x1, y1, starradius);
+    
+  }
+  
+  void reset(){
+    hx = random(-width, width);
+    hy = random(-height, height);
+    z = width;
+    starradius = 0.2;
+    z1 = z;
+  }
   
   Particle(float x, float y, float size, float mass, boolean smoky){
     this.x = x;
@@ -50,6 +91,8 @@ class Particle{
       }
     }
   }
+  
+  
   
   void move() {
     velocity.add(acceleration);

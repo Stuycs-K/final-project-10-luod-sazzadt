@@ -1,10 +1,28 @@
 class MolecularCloud{
   
+  Particle[] introstars = new Particle[600];
   Particle[] ParticleSystem;
   Particle centerOfGravity;
   float density;
   int radius, r1, maxNum;
   int absorbed = 0;
+  
+  MolecularCloud(){
+    for(int i = 0; i < 600; i++){
+    introstars[i] = new Particle();
+  }
+  }
+  
+  void display2(){
+    for(int i = 0; i < introstars.length; i++){
+      introstars[i].changeposition();
+      introstars[i].display2();
+      
+      if (introstars[i].z < 1){
+        introstars[i].reset();
+      }
+    }
+  }
   
   MolecularCloud(float density, int radius){
     centerOfGravity = new Particle(width/2, height/2, 10, 5, false);
