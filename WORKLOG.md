@@ -50,6 +50,12 @@ Added colors to the main sequence stage so that the vibrance of the color decrea
 ### 6/5/23
 Created a new button to display the information about the current stage. Added a method to the Stats class that will show the information when the button is clicked.
 
+### 6/6/23
+Fixed glitches in the reset button and other technical issues in the stats class.
+
+### 6/7/23 - 6/8/23
+Changed the luminosity graph so it always shows (removed the button). Added an intro slide show to the simulation.
+
 ## Tazrian Sazzad
 
 ### 5/22/23
