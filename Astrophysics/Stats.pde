@@ -6,7 +6,10 @@ class Stats{
   float radius;
   String[] stageInfo = new String[]
   {"The stellar nebula is the molecular cloud that makes up initial stage of the birth of a star. As its temperature and pressure increase, a fragment condenses into a rotating sphere of superhot gas known as a protostar.",
-  "After 10^6 years, a dense, hot core of the size of Mercury's orbit called the protostar is formed. However, the core temperature is still not hot enough for nuclear fusion to occur."};
+  "After 10^6 years, a dense, hot core of the size of Mercury's orbit called the protostar is formed. However, the core temperature is still not hot enough for nuclear fusion to occur.",
+  "The main-sequence stage is where a star spends most of its lifetime on. As the pressure and gravity are finally balanced, the star has reached the the state of hydrostatic equilibrium.",
+  "The star has completed fusing hydrogen in its core. The core collapsed, releasing lots of energy, which causes an increase in size and temperature of the star."};
+  
   
   Stats(float mass, String stage){
     this.mass = mass;
@@ -52,6 +55,7 @@ class Stats{
   void graphLuminosity(){
     noStroke();
     fill(215, 206, 235);
+    text("Stats graphs:", 685, 70);
     rect(685, 80, 265, 150, 20);
     stroke(135, 118, 171);
     line(720, 90, 720, 200);
@@ -111,8 +115,9 @@ class Stats{
   
   void remakeGraph(){
     lumGraph.clear();
-     noStroke();
+    noStroke();
     fill(215, 206, 235);
+    text("Stats graphs:", 685, 70);
     rect(685, 80, 265, 150, 20);
     stroke(135, 118, 171);
     line(720, 90, 720, 200);

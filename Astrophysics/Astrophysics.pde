@@ -5,7 +5,6 @@ Slider timeSlider;
 MolecularCloud molCloud;
 Star sun;
 Button setUpButton;
-Button statsButton;
 Stats graph;
 Stats statsboard;
 Button infoButton;
@@ -67,7 +66,6 @@ void setup(){
   sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
   statsboard = new Stats(solarMass, stage);
   graph = new Stats();
-  statsButton = new Button(800, 50, "Show Graph");
   infoButton = new Button(50, 170, "Learn More");
   infoboard = new Stats();
   
@@ -88,20 +86,6 @@ void tick() {
 
 void draw(){
   background(0);
-    
-  //Update time and cloud density, display information
-  cloudDensity = densitySlider.getValue();
-  time = timeSlider.getValue();
-  densitySlider.display();
-  timeSlider.display();
-  statsboard.display();
-  setUpButton.run();
-  statsboard.display();
-  statsboard.changeStats(solarMass, stage);
-  timeSlider.display();
-  statsboard.display();
-  statsButton.run2();
-  infoButton.run3();
   
   //Monitor user input, update variables, update graph
   if (!doneSetUp){
@@ -142,13 +126,6 @@ void draw(){
   if (doneSetUp && frameCount % DELAY == 0){
     lumGraph.add(pow(solarMass, 3.5));
   }
-  if (time == 0 && doneSetUp){lumGraph.add(pow(solarMass, 3.5));}
-  if (showGraph){
-    graph.graphLuminosity();
-  }
-  if (doneSetUp){
-    graph.updateGraph();
-  }
   else if (!doneSetUp && time == 0){
     start = 0;
     end = 100000;
@@ -162,11 +139,7 @@ void draw(){
     end2 = 1000;
   }
   timeNow = timeSlider.getValue();
-  
-  if (showInfo){
-    infoboard.displayInfo();
-  }
-  
+ 
   if (reset && cloudDensity == densitySlider.getValue()){
     sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
@@ -185,4 +158,32 @@ void draw(){
   }
   time = timeSlider.getValue();
   sun.mainSequenceColor();
+  
+  
+  
+  
+  
+  
+  
+  
+  //Update time and cloud density, display information
+  cloudDensity = densitySlider.getValue();
+  time = timeSlider.getValue();
+  densitySlider.display();
+  timeSlider.display();
+  statsboard.display();
+  setUpButton.run();
+  statsboard.display();
+  statsboard.changeStats(solarMass, stage);
+  timeSlider.display();
+  statsboard.display();
+  infoButton.run3();
+  if (showInfo){
+    infoboard.displayInfo();
+  }
+  if (time == 0 && doneSetUp){lumGraph.add(pow(solarMass, 3.5));}
+  graph.graphLuminosity();
+  if (doneSetUp){
+    graph.updateGraph();
+  }
 }
