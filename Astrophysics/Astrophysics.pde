@@ -169,7 +169,7 @@ void draw(){
     timeNow = 0;
     graph.remakeGraph();
     graph.updateGraph();
-    stage = "Molecular Cloud";
+    stage = "Stellar Nebula";
   }
   time = timeSlider.getValue();
   sun.mainSequenceColor();
