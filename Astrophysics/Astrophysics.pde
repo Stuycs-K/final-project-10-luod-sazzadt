@@ -33,6 +33,7 @@ boolean reset;
 float timeWhenClicked;
 boolean darker;
 boolean showInfo;
+int stageNum;
 
 void setup(){
   size(1000, 750);
@@ -65,6 +66,7 @@ void setup(){
   lumGraph = new ArrayList<Float>();
   darker = false;
   showInfo = false;
+  stageNum = 0;
   
   //Initialize Objects
   play = new Button(width/2 - 60, height/2 + 150, "START");
@@ -128,14 +130,6 @@ void draw(){
   if (time <= 300000){
   sun.display(width / 2, height / 2, cloudDensity);}
   
-  //Transition between stages
-  if(time == 150000) {
-    stage = "Protostar";
-  }
-  if (molCloud.endStellarNeb()){
-    stage = "Main Sequence Star";
-  }
-  
   //Update time
   tick();
   if (doneSetUp && frameCount % DELAY == 0){
@@ -170,6 +164,7 @@ void draw(){
     graph.remakeGraph();
     graph.updateGraph();
     stage = "Stellar Nebula";
+    stageNum = 0;
   }
   time = timeSlider.getValue();
   sun.mainSequenceColor();
@@ -198,13 +193,22 @@ void draw(){
   }
   if (time == 0 && doneSetUp){lumGraph.add(pow(solarMass, 3.5));}
   graph.graphLuminosity();
+  fill(215, 206, 235);
+  text("Stats graphs:", 685, 70);
   if (doneSetUp){
     graph.updateGraph();
   }
   
-  
-  
-  
+  //Transition between stages
+  if(time == 150000) {
+    stage = "Protostar";
+    stageNum = 1;
+  }
+  if (molCloud.endStellarNeb()){
+    stage = "Main Sequence Star";
+    stageNum = 2;
+  }
   
   }
+
 }

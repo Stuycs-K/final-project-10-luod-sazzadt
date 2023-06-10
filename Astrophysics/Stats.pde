@@ -56,15 +56,15 @@ class Stats{
     noStroke();
     fill(215, 206, 235);
     text("Stats graphs:", 685, 70);
-    rect(685, 80, 265, 150, 20);
+    rect(665, 80, 285, 150, 20);
     stroke(135, 118, 171);
     line(720, 90, 720, 200);
     line(720, 200, 930, 200);
     fill(135, 118, 171);
     text("Luminosity vs. Time", 700 + 70, 220);
     fill(135, 118, 171);
-    text(start2, 694, 201);
-    text(end2, 694, 98);
+    text(start2, 670, 201);
+    text(end2, 670, 98);
     text(start, 718, 212);
     text(end, 905, 212);
   }
@@ -115,27 +115,26 @@ class Stats{
     lumGraph.clear();
     noStroke();
     fill(215, 206, 235);
-    text("Stats graphs:", 685, 70);
-    rect(685, 80, 265, 150, 20);
+    rect(665, 80, 285, 150, 20);
     stroke(135, 118, 171);
     line(720, 90, 720, 200);
     line(720, 200, 930, 200);
     fill(135, 118, 171);
     text("Luminosity vs. Time", 700 + 70, 220);
     fill(135, 118, 171);
-    text(start2, 694, 201);
-    text(end2, 694, 98);
+    text(start2, 670, 201);
+    text(end2, 670, 98);
     text(start, 718, 212);
     text(end, 905, 212);
   }
   
   void displayInfo(){
-    int h = (stageInfo[0].length() / 18) * 20;
+    int h = (stageInfo[stageNum].length() / 18) * 20;
     noStroke();
     fill(215, 206, 235);
     rect(50, 200, 150, h, 20);
     fill(135, 118, 171);
-    text(stageInfo[0], 60, 208, 130, 250);
+    text(stageInfo[stageNum], 60, 208, 130, 250);
   }
  }
  
