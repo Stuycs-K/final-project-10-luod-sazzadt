@@ -77,12 +77,13 @@ class Particle{
   
   void changeposition(){
     hz = hz - 15;
-    if (hz < 1){
+    if (this.hz < 1){
+      hz = width;
+      hx = random(-width, width);
+      hy = random(-height, height);
       z1 = hz;
     }
-  }
-  
-  
+  } 
   
   void display2(){
     x1 = map(hx/hz, 0, 1, 0, width);
@@ -92,11 +93,12 @@ class Particle{
     
     x2 = map(hx/z1, 0, 1, 0, width);
     y2 = map(hy/z1, 0, 1, 0, height);
-    
+    this.z1 = this.hz;
     noFill();
     stroke(map(hz, 0, width, 300, 150));
-    line(x2, y2, x1, y1);
-    
+    stroke(random(150, 255), 100, random(150, 255));
+    line(x2, y2, x1, y1); 
+
     fill(255);
     noStroke();
     circle(x1, y1, starradius);

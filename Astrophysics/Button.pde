@@ -97,8 +97,10 @@ class Button{
     fill(215, 206, 235);
     if (startPlay == false){
       startPlay = true;
+      mode = 1;
     }
-    else{startPlay = false;}
+    else{startPlay = false;
+    mode = 0;}
     }
     }
   }  

@@ -38,16 +38,18 @@ boolean showInfo;
 int stageNum;
 PVector gravity = new PVector(0, 0.2);
 float mainseqStartNum;
+int mode;
 
 void setup(){
   size(1000, 750);
+  mode = 0;
   intro = new MolecularCloud();
   img = loadImage("astrotitle.png");
   //img2 = loadImage("csastrotitle.png");
   //Initialize Sliders
   densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
-  timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
+  timeSlider = new Slider(50, 625, 350, 20, 0, 5000, "Time (in thousands of years)", false);
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   
@@ -75,7 +77,7 @@ void setup(){
   
   //Initialize Objects
   play = new Button(width/2 - 60, height/2 + 150, "START");
-  goBack = new Button(width/2 - 60, height/2 + 150, "HOME");
+  goBack = new Button(800, 20, "HOME");
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   setUpButton = new Button(800, 650, "Begin Simulation");
   sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
@@ -101,14 +103,15 @@ void tick() {
 
 void draw(){
   background(0);
-  if (startPlay == false){
+  if (mode == 0){
     translate(width/2, height/2);
     intro.display2();
     translate(-width/2, -height/2);
     image(img, width/2 - (width * 0.85)/2, height/2 - (height * 0.55)/2, width * 0.85, height * 0.55);
     play.run2();
   }
-  else{
+  
+  if (mode == 1){
   //if (timeSlider.getValue() != timeSlider.max){
   //Monitor user input, update variables, update graph
   if (!doneSetUp){
@@ -225,7 +228,6 @@ void draw(){
     stage = "Red Giant";
     stageNum = 3;
   }
-  
   
   }
 }
