@@ -34,6 +34,7 @@ float timeWhenClicked;
 boolean darker;
 boolean showInfo;
 int stageNum;
+PVector gravity = new PVector(0, 0.2);
 
 void setup(){
   size(1000, 750);

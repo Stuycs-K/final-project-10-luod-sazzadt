@@ -13,8 +13,59 @@ class Particle{
   float v = (float) (Math.random() * 360);
   float angle;
   float circleRadius;
-  
+  boolean sup;
   float hx, hy, hz, z1,x1, x2, y1, y2, starradius;
+  float lifeSpan;
+  
+  Particle(float xpos, float ypos){
+    this.position = new PVector(xpos,ypos);
+    this.acceleration = new PVector(0,0);
+    this.lifeSpan = 255;
+
+      this.velocity = PVector.random2D();
+      this.velocity.mult(random(0.5,10));
+
+  }
+
+  void applyForce2(PVector force){
+    this.acceleration.add(force);
+  }
+
+  void update(){
+
+       this.velocity.mult(0.96);
+       this.lifeSpan = this.lifeSpan - 6;
+
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.acceleration.mult(0);
+  }
+
+  void show(int count){
+    if (this.lifeSpan > 0){
+        if(count<80){
+          strokeWeight(2);
+          stroke(255,255,255, this.lifeSpan);
+        }else{
+          strokeWeight(3);
+          stroke(255,255,255,this.lifeSpan);
+        }
+    
+    point(this.position.x, this.position.y);
+  }
+  }
+
+  boolean done(){
+    if(this.lifeSpan < 0){
+      return true;
+    }
+    return false;
+  }
+  
+  
+  
+  
+  
   
   Particle(){
     this.hx = random(-width, width);
@@ -22,12 +73,16 @@ class Particle{
     this.hz = random(0, width);
   }
   
+ 
+  
   void changeposition(){
     hz = hz - 15;
     if (hz < 1){
       z1 = hz;
     }
   }
+  
+  
   
   void display2(){
     x1 = map(hx/hz, 0, 1, 0, width);
@@ -98,12 +153,6 @@ class Particle{
     velocity.add(acceleration);
     position.add(velocity);
     acceleration.set(0, 0);
-    /*
-    if(smoky) {
-     // ps = new LightParticleSystem(0, position);
-
-    }
-    */
   }
   
   PVector attractTo(Particle other) {
