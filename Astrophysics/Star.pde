@@ -4,7 +4,7 @@ class Star {
   float mass;
   float temperature;
   Particle centerOfGravity2;
-  int starColor;
+  float starColor;
   float r2, g2, b2;
   float glowradius;
   float rmax;
@@ -20,6 +20,7 @@ class Star {
 
   public void display(int x, int y, float density) {
     colorMode(HSB, 360, 100, 100, 100);
+    if (stageNum < 3){
     if(density < 20) {
       starColor = 0;
       r2 = 255;
@@ -54,6 +55,12 @@ class Star {
     circle(x, y, radius);
     noFill();
     colorMode(RGB, 255, 255, 255);
+    }
+    else if (stageNum == 3){
+      r2 = 255;
+      g2 = 255;
+      b2 = 255;
+    }
   }
   
   public void updateSize(float r) {
@@ -115,26 +122,54 @@ class Star {
   void mainSequenceColor(){
     if (stageNum == 2){
         if (densitySlider.getValue() < 40){
-          g2 = g2 + 0.5;
-          b2 = b2 + 0.5;
+          g2 = g2 + 1;
+          b2 = b2 + 1;
         }
         else if (densitySlider.getValue() < 60){
-          b2 = b2 + 0.5;
+          b2 = b2 + 1;
         }
         else if (densitySlider.getValue() < 80){
-          r2 = r2 + 0.5;
+          r2 = r2 + 1;
         }
         else{
-          r2 = r2 + 0.5;
-          g2 = g2 + 0.5;
+          r2 = r2 + 1;
+          g2 = g2 + 1;
         }
         if (glowradius >= height/4){
-        glowradius = glowradius - 0.2;}
+        glowradius = glowradius - 0.3;}
         //rmax = rmax - 0.00002;
         //radius = radius - 0.002;
         //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
         //display2(width / 2, height / 2, r2, g2, b2);
         solarMass += 0.0005;
+    }
+  }
+  
+  void redGiantColor(){
+    if (stageNum == 3){
+      g2 = g2 - 0.02;
+      b2 = b2 - 0.02;
+      starColor = starColor - 0.5;
+        //if (densitySlider.getValue() > 20 && densitySlider.getValue() < 40){
+        //  g2 = g2 - 1;
+        //}
+        //else if (densitySlider.getValue() < 60){
+        //  g2 = g2 - 2;
+        //}
+        //else if (densitySlider.getValue() < 80){
+        //  r2 = r2 + 1;
+        //}
+        //else{
+        //  r2 = r2 + 1;
+        //  g2 = g2 + 1;
+        //}
+        if (glowradius >= height/4){
+        glowradius = glowradius + 0.3;}
+        //rmax = rmax - 0.00002;
+        //radius = radius - 0.002;
+        //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
+        //display2(width / 2, height / 2, r2, g2, b2);
+        solarMass -= 0.001;
     }
   }
 

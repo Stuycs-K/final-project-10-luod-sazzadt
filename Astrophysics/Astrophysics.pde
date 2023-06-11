@@ -1,6 +1,7 @@
 import java.util.*;
 //Created Objects
 Button play;
+Button goBack;
 Slider densitySlider;
 Slider timeSlider;
 MolecularCloud intro;
@@ -12,6 +13,7 @@ Stats statsboard;
 Button infoButton;
 Stats infoboard;
 PImage img;
+//PImage img2;
 
 //Global Variables
 boolean startPlay = false;
@@ -41,10 +43,11 @@ void setup(){
   size(1000, 750);
   intro = new MolecularCloud();
   img = loadImage("astrotitle.png");
+  //img2 = loadImage("csastrotitle.png");
   //Initialize Sliders
   densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
-  timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
+  timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   
@@ -72,6 +75,7 @@ void setup(){
   
   //Initialize Objects
   play = new Button(width/2 - 60, height/2 + 150, "START");
+  goBack = new Button(width/2 - 60, height/2 + 150, "HOME");
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
   setUpButton = new Button(800, 650, "Begin Simulation");
   sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
@@ -105,7 +109,7 @@ void draw(){
     play.run2();
   }
   else{
-  
+  //if (timeSlider.getValue() != timeSlider.max){
   //Monitor user input, update variables, update graph
   if (!doneSetUp){
     solarMass = 0;
@@ -169,8 +173,12 @@ void draw(){
     stageNum = 0;
   }
   time = timeSlider.getValue();
-  if (stageNum == 2 && time <= 430000){
-  sun.mainSequenceColor();}
+  if (stageNum == 2){
+  sun.mainSequenceColor();
+  }
+  if (stageNum == 3){
+    sun.redGiantColor();
+  }
   sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
   
   
@@ -208,7 +216,7 @@ void draw(){
     stage = "Protostar";
     stageNum = 1;
   }
-  if (molCloud.endStellarNeb()){
+  if (molCloud.endStellarNeb() && time < 430000){
     stage = "Main Sequence Star";
     stageNum = 2;
     mainseqStartNum = timeSlider.getValue();
@@ -220,5 +228,4 @@ void draw(){
   
   
   }
-
 }

@@ -96,15 +96,9 @@ class Button{
     rect(x, y, 120, 20, 20);
     fill(215, 206, 235);
     if (startPlay == false){
-      //name = "Hide Graph";
-      //text(name, x + 10, y + 14);
       startPlay = true;
     }
-    //else if (showGraph == true){
-    //  name = hold;
-    //  text(name, x + 10, y + 14);
-    //  showGraph = false;
-    //}
+    else{startPlay = false;}
     }
     }
   }  
