@@ -56,6 +56,13 @@ Fixed glitches in the reset button and other technical issues in the stats class
 ### 6/7/23 - 6/8/23
 Changed the luminosity graph so it always shows (removed the button). Added an intro slide show to the simulation.
 
+### 6/9/23 - 6/10/23
+Fixed the learn more button so the information displayed updates automatically depending on the stage the star is on. Added the group info and overview in the README. Wrote the supernova class and its corresponding methods in Particle (not implemented in draw yet).
+
+### 6/11/23
+Beginning to finalize the stages. Finished the red giant phase.
+
+
 ## Tazrian Sazzad
 
 ### 5/22/23
