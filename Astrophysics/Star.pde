@@ -147,9 +147,18 @@ class Star {
   
   void redGiantColor(){
     if (stageNum == 3){
-      g2 = g2 - 0.02;
-      b2 = b2 - 0.02;
-      starColor = starColor - 0.5;
+      if (densitySlider.getValue() < 70){
+        g2 = g2 - 0.02;
+        b2 = b2 - 0.02;
+        starColor = starColor - 0.5;
+        solarMass -= 0.001;
+      }
+      else{
+        g2 = g2 - 0.3;
+        b2 = b2 - 0.3;
+        starColor = starColor - 2;
+        solarMass -= 0.002;
+      }
         //if (densitySlider.getValue() > 20 && densitySlider.getValue() < 40){
         //  g2 = g2 - 1;
         //}
@@ -169,7 +178,6 @@ class Star {
         //radius = radius - 0.002;
         //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
         //display2(width / 2, height / 2, r2, g2, b2);
-        solarMass -= 0.001;
     }
   }
 

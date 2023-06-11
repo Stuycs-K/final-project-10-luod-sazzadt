@@ -8,7 +8,8 @@ class Stats{
   {"The stellar nebula is the molecular cloud that makes up initial stage of the birth of a star. As its temperature and pressure increase, a fragment condenses into a rotating sphere of superhot gas known as a protostar.",
   "After 10^6 years, a dense, hot core of the size of Mercury's orbit called the protostar is formed. However, the core temperature is still not hot enough for nuclear fusion to occur.",
   "The main-sequence stage is where a star spends most of its lifetime on. As the pressure and gravity are finally balanced, the star has reached the the state of hydrostatic equilibrium.",
-  "The star has completed fusing hydrogen in its core. The core collapsed, releasing lots of energy, which causes an increase in size and temperature of the star."};
+  "During the red giant phase, the star has completed fusing hydrogen in its core. The core collapsed, releasing lots of energy, which causes an increase in size and temperature of the star.",
+  "Once on the horizontal branch, the star slowly goes back to its original size and begins to increase in luminosity. The complete consumption of heavier and heavier elements through fusion takes less and less time."};
   
   
   Stats(float mass, String stage){
@@ -57,6 +58,7 @@ class Stats{
     fill(215, 206, 235);
     text("Stats graphs:", 685, 70);
     rect(665, 80, 285, 150, 20);
+    strokeWeight(1);
     stroke(135, 118, 171);
     line(720, 90, 720, 200);
     line(720, 200, 930, 200);
@@ -103,6 +105,7 @@ class Stats{
         for (int i = 0; i < size - 1; i++){
         float n1 = lumGraph.get(i);
         float n2 = lumGraph.get(i + 1);
+        strokeWeight(1);
         stroke(135, 118, 171);
         line(720 + (210 * (time1/100000)), 200 - ((n1/end2) * 110), 720 + (210 * (time1/100000)) + 2.1, 200 - ((n2/end2) * 110));
         time1 = time1 + 1000;
@@ -116,6 +119,7 @@ class Stats{
     noStroke();
     fill(215, 206, 235);
     rect(665, 80, 285, 150, 20);
+    strokeWeight(1);
     stroke(135, 118, 171);
     line(720, 90, 720, 200);
     line(720, 200, 930, 200);

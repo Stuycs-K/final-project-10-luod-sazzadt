@@ -48,6 +48,21 @@ class Slider{
     return changed;
   }
   
+  boolean changed2(int mousex, int mousey){
+    boolean changed = false;
+
+      if (mousex > x && mousex < x + w && mousey > y && mousey < y + h){
+      changed = true;
+    }
+    if (changed){
+      valueX = mousex;
+      value = map(mousex, x, x + w, min, max);
+    }
+
+    return changed;
+  }
+  
+  
   void increment(float amount) {
     if(value < max) {
       value += amount;

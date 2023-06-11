@@ -13,7 +13,6 @@ Stats statsboard;
 Button infoButton;
 Stats infoboard;
 PImage img;
-//PImage img2;
 
 //Global Variables
 boolean startPlay = false;
@@ -45,11 +44,11 @@ void setup(){
   mode = 0;
   intro = new MolecularCloud();
   img = loadImage("astrotitle.png");
-  //img2 = loadImage("csastrotitle.png");
+
   //Initialize Sliders
   densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
-  timeSlider = new Slider(50, 625, 350, 20, 0, 5000, "Time (in thousands of years)", false);
+  timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   
@@ -85,11 +84,6 @@ void setup(){
   graph = new Stats();
   infoButton = new Button(50, 170, "Learn More");
   infoboard = new Stats();
-  
-  //Initial Methods
-  //setUpButton.display();
-  //statsboard.display();
-  //molCloud.display(doneSetUp, r, g, b, stage);
 }
 
 void tick() {
@@ -112,16 +106,16 @@ void draw(){
   }
   
   if (mode == 1){
-  //if (timeSlider.getValue() != timeSlider.max){
   //Monitor user input, update variables, update graph
   if (!doneSetUp){
     solarMass = 0;
   }
   if (doneSetUp && time <= 150000){
-    solarMass += 0.007;
+    solarMass += 0.014 * (densitySlider.getValue() / 100);
   }
   if (mousePressed){
     densitySlider.changed(mouseX, mouseY);
+    //timeSlider.changed2(mouseX, mouseY);
   }
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
@@ -182,6 +176,9 @@ void draw(){
   if (stageNum == 3){
     sun.redGiantColor();
   }
+  if (stageNum == 4){
+   
+  }
   sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
   
   
@@ -228,6 +225,9 @@ void draw(){
     stage = "Red Giant";
     stageNum = 3;
   }
-  
+  if (time == 600000){
+    stage = "Supernova";
+    stageNum = 4;
+  }
   }
 }

@@ -96,12 +96,8 @@ class Particle{
     this.z1 = this.hz;
     noFill();
     stroke(map(hz, 0, width, 300, 150));
-    stroke(random(150, 255), 100, random(150, 255));
+    stroke(random(150, 255), 255, random(150, 255));
     line(x2, y2, x1, y1); 
-
-    fill(255);
-    noStroke();
-    circle(x1, y1, starradius);
     
   }
   
