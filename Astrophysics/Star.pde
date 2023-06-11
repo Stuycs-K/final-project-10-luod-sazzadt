@@ -6,12 +6,16 @@ class Star {
   Particle centerOfGravity2;
   int starColor;
   float r2, g2, b2;
+  float glowradius;
+  float rmax;
   
   public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
     temperature = theTemperature;
     radius = theRadius;
     core = new Core(ELLIPSE, radius / 5);
+    glowradius = height/2;
+    rmax = 0.5;
   }
 
   public void display(int x, int y, float density) {
@@ -60,9 +64,9 @@ class Star {
     colorMode(HSB, 360, 100, 100, 100);
     blendMode(ADD);
     noStroke();
-    for (float r = 0.0; r < 0.5; r += 0.01) {
+    for (float r = 0.0; r < rmax; r += 0.01) {
       fill(starColor, saturation, 5, 100);
-      circle(x, y, y * r * (radius / 20) * 0.5);
+      circle(x, y, glowradius * r * (radius / 20) * 0.5);
     }
     colorMode(RGB, 255, 255, 255);
     blendMode(BLEND);
@@ -109,7 +113,7 @@ class Star {
   }
   
   void mainSequenceColor(){
-    if (time > 300000 && time < 4300000){
+    if (stageNum == 2){
         if (densitySlider.getValue() < 40){
           g2 = g2 + 0.5;
           b2 = b2 + 0.5;
@@ -124,9 +128,14 @@ class Star {
           r2 = r2 + 0.5;
           g2 = g2 + 0.5;
         }
-        display2(width / 2, height / 2, r2, g2, b2);
+        if (glowradius >= height/4){
+        glowradius = glowradius - 0.2;}
+        //rmax = rmax - 0.00002;
+        //radius = radius - 0.002;
+        //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
+        //display2(width / 2, height / 2, r2, g2, b2);
         solarMass += 0.0005;
-  }
+    }
   }
 
 }

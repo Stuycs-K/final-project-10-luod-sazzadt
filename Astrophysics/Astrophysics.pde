@@ -35,6 +35,7 @@ boolean darker;
 boolean showInfo;
 int stageNum;
 PVector gravity = new PVector(0, 0.2);
+float mainseqStartNum;
 
 void setup(){
   size(1000, 750);
@@ -168,7 +169,9 @@ void draw(){
     stageNum = 0;
   }
   time = timeSlider.getValue();
-  sun.mainSequenceColor();
+  if (stageNum == 2 && time <= 430000){
+  sun.mainSequenceColor();}
+  sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
   
   
   
@@ -208,7 +211,13 @@ void draw(){
   if (molCloud.endStellarNeb()){
     stage = "Main Sequence Star";
     stageNum = 2;
+    mainseqStartNum = timeSlider.getValue();
   }
+  if (time == 430000){
+    stage = "Red Giant";
+    stageNum = 3;
+  }
+  
   
   }
 
