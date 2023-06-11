@@ -23,6 +23,15 @@ class Button{
     text(name, x + 10, y + 14);
   }
   
+  void display2(){
+    noStroke();
+    fill(215, 206, 235);
+    rect(x, y, 120, 20, 20);
+    fill(135, 118, 171);
+    text(name, x + 10, y + 14);
+    image(img, width/2 - (width * 0.85)/2, height/2 - (height * 0.55)/2, width * 0.85, height * 0.55);
+  }
+  
   void update(){
     if (!(mousePressed)){
       if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
@@ -98,16 +107,48 @@ class Button{
     if (startPlay == false){
       startPlay = true;
       mode = 1;
-    }
-    else{startPlay = false;
-    mode = 0;}
+      name = "START AGAIN";
     }
     }
-  }  
+  }
+  }
+  
+  void update4(){
+    if (!(mousePressed)){
+    if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    text(name, x + 10, y + 14);
+    }
+    }
+    else if (mousePressed){
+      if(lastPressed > 0) {
+        if(frameCount - lastPressed < 35) {
+          return;
+        }
+      }
+      if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+        lastPressed = frameCount;
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    startPlay = false;
+      mode = 2;
+    }
+    }
+  }
   
   void run2(){
     display();
     update2();
+  }
+  
+  void run4(){
+    display();
+    update4();
   }
   
   void update3(){
