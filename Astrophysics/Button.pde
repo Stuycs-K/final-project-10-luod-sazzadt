@@ -135,11 +135,42 @@ class Button{
     fill(135, 118, 171);
     rect(x, y, 120, 20, 20);
     fill(215, 206, 235);
-    startPlay = false;
-      mode = 2;
+    if (startPlay == false){
+      startPlay = true;
+      mode = 3;
+    }
     }
     }
   }
+  
+  void update5(){
+    if (!(mousePressed)){
+    if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    text(name, x + 10, y + 14);
+    }
+    }
+    else if (mousePressed){
+      if(lastPressed > 0) {
+        if(frameCount - lastPressed < 35) {
+          return;
+        }
+      }
+      if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+        lastPressed = frameCount;
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    startPlay = false;
+    mode = 2;
+    }
+    }
+  }
+  
   
   void run2(){
     display();
@@ -149,6 +180,46 @@ class Button{
   void run4(){
     display();
     update4();
+  }
+  
+  void run5(){
+    display();
+    update5();
+  }
+  
+  void update6(){
+    if (!(mousePressed)){
+    if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    text(name, x + 10, y + 14);
+    }
+    }
+    else if (mousePressed){
+      if(lastPressed > 0) {
+        if(frameCount - lastPressed < 35) {
+          return;
+        }
+      }
+      if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){
+        lastPressed = frameCount;
+      noStroke();
+    fill(135, 118, 171);
+    rect(x, y, 120, 20, 20);
+    fill(215, 206, 235);
+    if (showHr == false){showHr = true;
+    name = "Hide HR Diagram";}
+    else{showHr = false;
+    name = "HR Diagram";}
+    }
+    }
+  }
+  
+  void run6(){
+    display();
+    update6();
   }
   
   void update3(){

@@ -12,7 +12,8 @@ Stats graph;
 Stats statsboard;
 Button infoButton;
 Stats infoboard;
-PImage img, img2;
+Button Hr;
+PImage img, img2, img3;
 
 //Global Variables
 boolean startPlay = false;
@@ -38,6 +39,7 @@ int stageNum;
 PVector gravity = new PVector(0, 0.2);
 float mainseqStartNum;
 int mode;
+boolean showHr;
 
 void setup(){
   size(1000, 750);
@@ -45,11 +47,12 @@ void setup(){
   intro = new MolecularCloud();
   img = loadImage("astrotitle.png");
   img2 = loadImage("csastrotitle.png");
+  img3 = loadImage("HRDiagram.png");
 
   //Initialize Sliders
-  densitySlider = new Slider(800, 600, 130, 20, 0, 100, "Molecular Cloud Density", true); 
+  densitySlider = new Slider(800, 650, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
-  timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
+  timeSlider = new Slider(50, 680, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   
@@ -74,17 +77,19 @@ void setup(){
   darker = false;
   showInfo = false;
   stageNum = 0;
+  showHr = false;
   
   //Initialize Objects
   play = new Button(width/2 - 60, height/2 + 150, "START");
   goBack = new Button(800, 20, "HOME");
   molCloud = new MolecularCloud(densitySlider.getValue(), 300);
-  setUpButton = new Button(800, 650, "Begin Simulation");
+  setUpButton = new Button(800, 700, "Begin Simulation");
   sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
   statsboard = new Stats(solarMass, stage);
   graph = new Stats();
   infoButton = new Button(50, 170, "Learn More");
   infoboard = new Stats();
+  Hr = new Button(800, 250, "HR Diagram");
 }
 
 void tick() {
@@ -104,6 +109,7 @@ void draw(){
     translate(-width/2, -height/2);
     image(img, width/2 - (width * 0.85)/2, height/2 - (height * 0.55)/2, width * 0.85, height * 0.55);
     play.run2();
+    //atomic.run4();
   }
   else if (mode == 2){
     translate(width/2, height/2);
@@ -113,6 +119,7 @@ void draw(){
     tint(255, 255);
     image(img2, width/2 - (width * 0.85)/2, height/2 - (height * 0.55)/2, width * 0.85, height * 0.55);
     translate(-420, -200);
+    //atomic.run4();
     play.run2();
   }
   else if (mode == 1){
@@ -210,7 +217,8 @@ void draw(){
   timeSlider.display();
   statsboard.display();
   infoButton.run3();
-  goBack.run4();
+  Hr.run6();
+  goBack.run5();
   if (showInfo){
     infoboard.displayInfo();
   }
@@ -244,6 +252,11 @@ void draw(){
   if (time == timeSlider.max){
     startPlay = false;
     mode = 2;
+  }
+  
+  if (showHr == true){
+  tint(255, 255);
+  image(img3, 850, 430, 250, 300);
   }
   }
 }

@@ -15,7 +15,7 @@ class Stats{
   Stats(float mass, String stage){
     this.mass = mass;
     this.radius = mass * (6.957 * pow(10, 8));
-    this.luminosity = pow(mass, 3.5);
+    this.luminosity = pow(mass, 3.5) / 10;
     this.temp = pow(this.luminosity / pow(mass, 2), 0.25) * 5772;
     this.stage = stage;
   }
