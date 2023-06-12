@@ -47,7 +47,7 @@ void setup(){
   intro = new MolecularCloud();
   img = loadImage("astrotitle.png");
   img2 = loadImage("csastrotitle.png");
-  img3 = loadImage("HRDiagram.png");
+  img3 = loadImage("HRDiagram.jpg");
 
   //Initialize Sliders
   densitySlider = new Slider(800, 650, 130, 20, 0, 100, "Molecular Cloud Density", true); 
@@ -255,7 +255,7 @@ void draw(){
   
   if (showHr == true){
   tint(255, 255);
-  image(img3, 850, 430, 250, 300);
+  image(img3, 800, 460, 280, 330);
   }
   }
 }
