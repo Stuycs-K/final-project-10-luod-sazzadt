@@ -1,5 +1,4 @@
 class Star {
-  Core core;
   float radius;
   float mass;
   float temperature;
@@ -8,12 +7,13 @@ class Star {
   float r2, g2, b2;
   float glowradius;
   float rmax;
+  ArrayList<Nebula> nebulas = new ArrayList<Nebula>();
+  float nebulaBrightness = 0;
   
   public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
     temperature = theTemperature;
     radius = theRadius;
-    core = new Core(ELLIPSE, radius / 5);
     glowradius = height/2;
     rmax = 0.5;
   }
@@ -144,48 +144,33 @@ class Star {
     }
     solarMass += 0.0005;
   }
-  
+  void createSupernova() {
+    
+  }
   void redGiantColor(){
     if(time < 440000) {
       return;
     }
     if(stage.equals("Red Giant")) {
       glowradius = Math.max(0, glowradius - 2.5);
-      createNebula();
+      nebulas.add(new Nebula(glowradius));
     }
-    /*
-    if (densitySlider.getValue() < 70){
-      g2 = g2 - 0.02;
-      b2 = b2 - 0.02;
-      starColor = starColor - 0.5;
-      solarMass -= 0.001;
+    else {
+      
     }
-    else{
-      g2 = g2 - 0.3;
-      b2 = b2 - 0.3;
-      starColor = starColor - 2;
-      solarMass -= 0.002;
+  }
+  
+  void whiteDwarf() {
+    radius = Math.max(10, radius - 20);
+    r2 = Math.min(255, r2 + 5);
+    g2 = Math.min(255, g2 + 5);
+    b2 = Math.min(255, b2 + 5);
+  }
+  void showNebulas() {
+    nebulaBrightness = Math.min(80, nebulaBrightness += 0.5);
+    for(int i = 0; i < nebulas.size(); i++) {
+      nebulas.get(i).display(nebulaBrightness);
     }
-      //if (densitySlider.getValue() > 20 && densitySlider.getValue() < 40){
-      //  g2 = g2 - 1;
-      //}
-      //else if (densitySlider.getValue() < 60){
-      //  g2 = g2 - 2;
-      //}
-      //else if (densitySlider.getValue() < 80){
-      //  r2 = r2 + 1;
-      //}
-      //else{
-      //  r2 = r2 + 1;
-      //  g2 = g2 + 1;
-      //}
-      if (glowradius >= height/4){
-      glowradius = glowradius + 0.3;}
-      //rmax = rmax - 0.00002;
-      //radius = radius - 0.002;
-      //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
-      //display2(width / 2, height / 2, r2, g2, b2);
-      */
   }
 
 }

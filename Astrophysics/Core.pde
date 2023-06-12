@@ -1,14 +1,24 @@
-class Core {
-  PShape shape;
-  float mass;
-  float temperature;
-  float hydrogen;
+class Nebula {
   float radius;
-  public Core(int theShape, float theRadius) {
+  float hue;
+  public Nebula(float theRadius) {
     radius = theRadius;
-    shape = createShape(theShape, 0, 0, radius, radius);
+    if(theRadius < 300) {
+      hue = (float) (random(180, 240));
+    }
+    else {
+      hue = (float) (random(0, 60));
+    }
   }
-  public void display() {
-    shape(shape);
+  void display(float brightness) {
+    colorMode(HSB, 360, 100, 100, 100);
+    pushMatrix();
+    noFill();
+    stroke(hue, 85, brightness, 100);
+    strokeWeight(6);
+    ellipse(width / 2, height / 2, radius, radius);
+    noStroke();
+    colorMode(RGB, 255, 255, 255);
+    popMatrix();
   }
 }

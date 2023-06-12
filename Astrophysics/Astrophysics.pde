@@ -193,7 +193,13 @@ void draw(){
     sun.redGiantColor();
   }
   if (stageNum == 4){
-   
+    if(stage.equals("Planetary Nebula")) {
+      sun.showNebulas();
+      sun.whiteDwarf();
+    }  
+    else {
+      
+    }
   }
   sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
   
