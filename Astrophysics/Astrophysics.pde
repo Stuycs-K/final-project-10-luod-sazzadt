@@ -147,7 +147,7 @@ void draw(){
   statsboard.changeStats(solarMass, stage);
   sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
   if (time <= 300000){
-  sun.display(width / 2, height / 2, cloudDensity);}
+    sun.display(width / 2, height / 2, cloudDensity);}
   
   //Update time
   tick();
@@ -187,7 +187,7 @@ void draw(){
   }
   time = timeSlider.getValue();
   if (stageNum == 2){
-  sun.mainSequenceColor();
+    sun.mainSequenceColor();
   }
   if (stageNum == 3){
     sun.redGiantColor();
@@ -248,7 +248,7 @@ void draw(){
     }
     stageNum = 3;
   }
-  if (time == 600000){
+  if (time == 530000){
     if(stage.equals("Red Supergiant")) {
        stage = "Supernova";
     }

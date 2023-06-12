@@ -120,29 +120,28 @@ class Star {
   }
   
   void mainSequenceColor(){
-    if (stageNum == 2){
-        if (densitySlider.getValue() < 40){
-          g2 = g2 + 1;
-          b2 = b2 + 1;
-        }
-        else if (densitySlider.getValue() < 60){
-          b2 = b2 + 1;
-        }
-        else if (densitySlider.getValue() < 80){
-          r2 = r2 + 1;
-        }
-        else{
-          r2 = r2 + 1;
-          g2 = g2 + 1;
-        }
-        if (glowradius >= height/4){
-        glowradius = glowradius - 0.3;}
-        //rmax = rmax - 0.00002;
-        //radius = radius - 0.002;
-        //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
-        //display2(width / 2, height / 2, r2, g2, b2);
-        solarMass += 0.0005;
+    if(time < 360000) {
+      return;
     }
+    if(stage.equals("Red Giant")) {
+      r2 += 2;
+      g2 -= 1;
+      b2 -= 1;
+      starColor = Math.max(0, starColor - 0.5);
+      if(glowradius <= 4 * height/8) {
+        glowradius += 0.5;
+      }
+    }
+    else {
+      r2 += 5;
+      g2 -= 3;
+      b2 -= 3;
+      starColor = Math.max(0, starColor - 2.5);      
+      if(glowradius <= 6.3 * height/8) {
+        glowradius += 1.5;
+      }
+    }
+    solarMass += 0.0005;
   }
   
   void redGiantColor(){
