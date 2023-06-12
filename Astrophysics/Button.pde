@@ -98,6 +98,9 @@ class Button{
     if (startPlay == false){
       startPlay = true;
       mode = 1;
+      doneSetUp = false;
+      timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
+      setUpButton = new Button(800, 700, "Begin Simulation");
       name = "START AGAIN";
     }
     }
