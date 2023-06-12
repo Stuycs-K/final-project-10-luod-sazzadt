@@ -49,7 +49,7 @@ void setup(){
   intro = new MolecularCloud();
   img = loadImage("astrotitle.png");
   img2 = loadImage("csastrotitle.png");
-  img3 = loadImage("HRDiagram.png");
+  img3 = loadImage("HRDiagram.jpg");
   img4 = loadImage("blackhole.jpg");
 
   //Initialize Sliders
