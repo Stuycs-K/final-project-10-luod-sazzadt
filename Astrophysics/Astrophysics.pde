@@ -61,7 +61,7 @@ void setup(){
   doneSetUp = false;
   solarMass = 0;
   stage = "Stellar Nebula";
-  contract = false;
+  //contract = false;
   reset = false;
   r = 255;
   g = 255;
@@ -72,7 +72,7 @@ void setup(){
   end2 = 1000;
   timeNow = 0;
   showGraph = false;
-  timeWhenClicked = 0;
+  //timeWhenClicked = 0;
   lumGraph = new ArrayList<Float>();
   darker = false;
   showInfo = false;
@@ -237,7 +237,7 @@ void draw(){
   if (molCloud.endStellarNeb() && time < 430000){
     stage = "Main Sequence Star";
     stageNum = 2;
-    mainseqStartNum = timeSlider.getValue();
+    //mainseqStartNum = timeSlider.getValue();
   }
   if (time == 430000){
     stage = "Red Giant";
