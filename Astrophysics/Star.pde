@@ -11,6 +11,7 @@ class Star {
   float nebulaBrightness = 0;
   float defaultSaturation = 50;
   float defaultBrightness = 50;
+  int blackHoleTint = 0;
   
   public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
@@ -182,7 +183,8 @@ class Star {
   }
   
   void blackHole() {
-    image(img4, width/2, height/2, 400, 400);
+    tint(255, 255);
+    image(img4, width/2, height/2, 533, 300);
   }
 
 }

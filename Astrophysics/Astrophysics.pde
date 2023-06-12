@@ -190,6 +190,8 @@ void draw(){
     graph.updateGraph();
     stage = "Stellar Nebula";
     stageNum = 0;
+    supernova = false;
+    blackhole = false;
   }
   time = timeSlider.getValue();
   if (stageNum == 2){
@@ -205,7 +207,7 @@ void draw(){
     }  
     else {
       supernova = true;
-      if(time < 510000) {
+      if(time < 490000) {
          sun.supernova();
       }
       else {
@@ -215,7 +217,7 @@ void draw(){
     }
   }
   if(!blackhole) {
-  sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
+    sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
   }
   
   
@@ -284,9 +286,9 @@ void draw(){
     mode = 2;
   }
   
-  if (showHr == true){
-  tint(255, 255);
-  image(img3, 850, 430, 250, 300);
-  }
+    if (showHr == true){
+      tint(255, 255);
+      image(img3, 850, 430, 250, 300);
+    }
   }
 }
