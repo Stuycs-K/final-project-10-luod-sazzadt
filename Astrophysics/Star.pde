@@ -9,6 +9,8 @@ class Star {
   float rmax;
   ArrayList<Nebula> nebulas = new ArrayList<Nebula>();
   float nebulaBrightness = 0;
+  float defaultSaturation = 50;
+  float defaultBrightness = 50;
   
   public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
@@ -67,18 +69,23 @@ class Star {
     radius = r;
   }
   
-  void glow(float x, float y, float saturation) {
+  void glow(float x, float y, float saturation, boolean supernova) {
     colorMode(HSB, 360, 100, 100, 100);
     blendMode(ADD);
     noStroke();
     for (float r = 0.0; r < rmax; r += 0.01) {
-      fill(starColor, saturation, 5, 100);
+      if(supernova) {
+        colorMode(RGB, 255, 255, 255);
+        fill(255, 255, 255);
+      }
+      else {
+        fill(starColor, saturation, 5, 100);
+      }
       circle(x, y, glowradius * r * (radius / 20) * 0.5);
     }
     colorMode(RGB, 255, 255, 255);
     blendMode(BLEND);
   }
-  
 
   //public void displayData(int x, int y) {
   //  textSize(16);
@@ -144,9 +151,7 @@ class Star {
     }
     solarMass += 0.0005;
   }
-  void createSupernova() {
-    
-  }
+
   void redGiantColor(){
     if(time < 440000) {
       return;
@@ -155,13 +160,10 @@ class Star {
       glowradius = Math.max(0, glowradius - 2.5);
       nebulas.add(new Nebula(glowradius));
     }
-    else {
-      
-    }
   }
   
   void whiteDwarf() {
-    radius = Math.max(10, radius - 20);
+    radius -= 15;
     r2 = Math.min(255, r2 + 5);
     g2 = Math.min(255, g2 + 5);
     b2 = Math.min(255, b2 + 5);
@@ -171,6 +173,16 @@ class Star {
     for(int i = 0; i < nebulas.size(); i++) {
       nebulas.get(i).display(nebulaBrightness);
     }
+  }
+  void supernova() {
+    r2 = Math.min(255, r2 + 25);
+    g2 = Math.min(255, g2 + 25);
+    b2 = Math.min(255, b2 + 25);
+    glowradius += 10;
+  }
+  
+  void blackHole() {
+    image(img4, width/2, height/2, 400, 400);
   }
 
 }
