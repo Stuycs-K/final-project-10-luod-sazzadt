@@ -93,7 +93,7 @@ class Particle{
     
     x2 = map(hx/z1, 0, 1, 0, width);
     y2 = map(hy/z1, 0, 1, 0, height);
-    this.z1 = this.hz;
+    //this.z1 = this.hz;
     noFill();
     stroke(map(hz, 0, width, 300, 150));
     stroke(random(150, 255), 255, random(150, 255));
