@@ -200,7 +200,7 @@ void draw(){
   if (stageNum == 3){
     sun.redGiantColor();
   }
-  if (stageNum == 4){
+  if (stageNum == 4 || stageNum == 5 || stageNum == 6){
     if(stage.equals("Planetary Nebula")) {
       sun.showNebulas();
       sun.whiteDwarf();
@@ -212,6 +212,7 @@ void draw(){
       }
       else {
          blackhole = true;
+         stageNum = 6;
          sun.blackHole();
       }
     }
@@ -274,16 +275,34 @@ void draw(){
     if(stage.equals("Red Supergiant")) {
        supernova = true;
        stage = "Supernova";
+       stageNum = 4;
     }
     else {
       stage = "Planetary Nebula";
+      stageNum = 5;
     }
-    stageNum = 4;
   }
   
   if (time == timeSlider.max){
     startPlay = false;
     mode = 2;
+    sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
+    molCloud = new MolecularCloud(densitySlider.getValue(), 300);
+    time = 0;
+    timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
+    reset = false;
+    statsboard.resetStats();
+    start = 0;
+    end = 100000;
+    start2 = 0;
+    end2 = 1000;
+    timeNow = 0;
+    graph.remakeGraph();
+    graph.updateGraph();
+    stage = "Stellar Nebula";
+    stageNum = 0;
+    supernova = false;
+    blackhole = false;
   }
   
   if (showHr == true){
