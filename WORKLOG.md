@@ -94,3 +94,15 @@ Saturation of glow method changes based on luminosity values, different densitie
 
 ### 6/1/23
 Transition from protostar to main sequence star phase happens when all particles absorbed by center of gravity. Centripetal motion of particles in stellar nebula phase works as intended now.
+
+### 6/2/23
+Started work on the red giant and red super giant animation methods.
+
+### 6/6/23
+Finished red giant and red super giant methods, implemented nebula class and created the first version of stellar nebula.
+
+### 6/8/23
+Created supernova animation and black hole animation.
+
+#### 6/11/23
+Fixed issues with timing of transition between phases, fixed stellar nebula.
