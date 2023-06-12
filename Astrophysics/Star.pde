@@ -1,5 +1,4 @@
 class Star {
-  Core core;
   float radius;
   float mass;
   float temperature;
@@ -8,12 +7,16 @@ class Star {
   float r2, g2, b2;
   float glowradius;
   float rmax;
+  ArrayList<Nebula> nebulas = new ArrayList<Nebula>();
+  float nebulaBrightness = 0;
+  float defaultSaturation = 50;
+  float defaultBrightness = 50;
+  int blackHoleTint = 0;
   
   public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
     temperature = theTemperature;
     radius = theRadius;
-    core = new Core(ELLIPSE, radius / 5);
     glowradius = height/2;
     rmax = 0.5;
   }
@@ -67,12 +70,18 @@ class Star {
     radius = r;
   }
   
-  void glow(float x, float y, float saturation) {
+  void glow(float x, float y, float saturation, boolean supernova) {
     colorMode(HSB, 360, 100, 100, 100);
     blendMode(ADD);
     noStroke();
     for (float r = 0.0; r < rmax; r += 0.01) {
-      fill(starColor, saturation, 5, 100);
+      if(supernova) {
+        colorMode(RGB, 255, 255, 255);
+        fill(255, 255, 255);
+      }
+      else {
+        fill(starColor, saturation, 5, 100);
+      }
       circle(x, y, glowradius * r * (radius / 20) * 0.5);
     }
     colorMode(RGB, 255, 255, 255);
@@ -120,65 +129,62 @@ class Star {
   }
   
   void mainSequenceColor(){
-    if (stageNum == 2){
-        if (densitySlider.getValue() < 40){
-          g2 = g2 + 1;
-          b2 = b2 + 1;
-        }
-        else if (densitySlider.getValue() < 60){
-          b2 = b2 + 1;
-        }
-        else if (densitySlider.getValue() < 80){
-          r2 = r2 + 1;
-        }
-        else{
-          r2 = r2 + 1;
-          g2 = g2 + 1;
-        }
-        if (glowradius >= height/4){
-        glowradius = glowradius - 0.3;}
-        //rmax = rmax - 0.00002;
-        //radius = radius - 0.002;
-        //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
-        //display2(width / 2, height / 2, r2, g2, b2);
-        solarMass += 0.0005;
+    if(time < 360000) {
+      return;
+    }
+    if(stage.equals("Red Giant")) {
+      r2 += 2;
+      g2 -= 1;
+      b2 -= 1;
+      starColor = Math.max(0, starColor - 0.5);
+      if(glowradius <= 4 * height/8) {
+        glowradius += 0.5;
+      }
+    }
+    else {
+      r2 += 5;
+      g2 -= 3;
+      b2 -= 3;
+      starColor = Math.max(0, starColor - 2.5);      
+      if(glowradius <= 6.3 * height/8) {
+        glowradius += 1.5;
+      }
+    }
+    solarMass += 0.0005;
+  }
+
+  void redGiantColor(){
+    if(time < 440000) {
+      return;
+    }
+    if(stage.equals("Red Giant")) {
+      glowradius = Math.max(0, glowradius - 2.5);
+      nebulas.add(new Nebula(glowradius));
     }
   }
   
-  void redGiantColor(){
-    if (stageNum == 3){
-      if (densitySlider.getValue() < 70){
-        g2 = g2 - 0.02;
-        b2 = b2 - 0.02;
-        starColor = starColor - 0.5;
-        solarMass -= 0.001;
-      }
-      else{
-        g2 = g2 - 0.3;
-        b2 = b2 - 0.3;
-        starColor = starColor - 2;
-        solarMass -= 0.002;
-      }
-        //if (densitySlider.getValue() > 20 && densitySlider.getValue() < 40){
-        //  g2 = g2 - 1;
-        //}
-        //else if (densitySlider.getValue() < 60){
-        //  g2 = g2 - 2;
-        //}
-        //else if (densitySlider.getValue() < 80){
-        //  r2 = r2 + 1;
-        //}
-        //else{
-        //  r2 = r2 + 1;
-        //  g2 = g2 + 1;
-        //}
-        if (glowradius >= height/4){
-        glowradius = glowradius + 0.3;}
-        //rmax = rmax - 0.00002;
-        //radius = radius - 0.002;
-        //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
-        //display2(width / 2, height / 2, r2, g2, b2);
+  void whiteDwarf() {
+    radius -= 15;
+    r2 = Math.min(255, r2 + 5);
+    g2 = Math.min(255, g2 + 5);
+    b2 = Math.min(255, b2 + 5);
+  }
+  void showNebulas() {
+    nebulaBrightness = Math.min(80, nebulaBrightness += 0.5);
+    for(int i = 0; i < nebulas.size(); i++) {
+      nebulas.get(i).display(nebulaBrightness);
     }
+  }
+  void supernova() {
+    r2 = Math.min(255, r2 + 25);
+    g2 = Math.min(255, g2 + 25);
+    b2 = Math.min(255, b2 + 25);
+    glowradius += 10;
+  }
+  
+  void blackHole() {
+    tint(255, 255);
+    image(img4, width/2, height/2, 533, 300);
   }
 
 }

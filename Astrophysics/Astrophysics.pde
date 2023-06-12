@@ -13,7 +13,7 @@ Stats statsboard;
 Button infoButton;
 Stats infoboard;
 Button Hr;
-PImage img, img2, img3;
+PImage img, img2, img3, img4;
 
 //Global Variables
 boolean startPlay = false;
@@ -40,6 +40,8 @@ PVector gravity = new PVector(0, 0.2);
 //float mainseqStartNum;
 int mode;
 boolean showHr;
+boolean supernova = false;
+boolean blackhole = false;
 
 void setup(){
   size(1000, 750);
@@ -48,6 +50,7 @@ void setup(){
   img = loadImage("astrotitle.png");
   img2 = loadImage("csastrotitle.png");
   img3 = loadImage("HRDiagram.png");
+  img4 = loadImage("blackhole.jpg");
 
   //Initialize Sliders
   densitySlider = new Slider(800, 650, 130, 20, 0, 100, "Molecular Cloud Density", true); 
@@ -145,9 +148,12 @@ void draw(){
   //Display animation
   molCloud.display(doneSetUp, r, g, b, stage);
   statsboard.changeStats(solarMass, stage);
-  sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
+  if(!blackhole) {
+  sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)), supernova);
+  }
   if (time <= 300000){
-  sun.display(width / 2, height / 2, cloudDensity);}
+    sun.display(width / 2, height / 2, cloudDensity);
+  }
   
   //Update time
   tick();
@@ -184,19 +190,35 @@ void draw(){
     graph.updateGraph();
     stage = "Stellar Nebula";
     stageNum = 0;
+    supernova = false;
+    blackhole = false;
   }
   time = timeSlider.getValue();
   if (stageNum == 2){
-  sun.mainSequenceColor();
+    sun.mainSequenceColor();
   }
   if (stageNum == 3){
     sun.redGiantColor();
   }
   if (stageNum == 4){
-   
+    if(stage.equals("Planetary Nebula")) {
+      sun.showNebulas();
+      sun.whiteDwarf();
+    }  
+    else {
+      supernova = true;
+      if(time < 490000) {
+         sun.supernova();
+      }
+      else {
+         blackhole = true;
+         sun.blackHole();
+      }
+    }
   }
-  sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
-  
+  if(!blackhole) {
+    sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
+  }
   
   
   
@@ -240,11 +262,22 @@ void draw(){
     //mainseqStartNum = timeSlider.getValue();
   }
   if (time == 430000){
-    stage = "Red Giant";
+    if(cloudDensity > 60) {
+      stage = "Red Supergiant";
+    }
+    else {
+      stage = "Red Giant";
+    }
     stageNum = 3;
   }
-  if (time == 600000){
-    stage = "Supernova";
+  if (time == 530000 || (stage.equals("Red Supergiant") && time == 470000)) {
+    if(stage.equals("Red Supergiant")) {
+       supernova = true;
+       stage = "Supernova";
+    }
+    else {
+      stage = "Planetary Nebula";
+    }
     stageNum = 4;
   }
   
@@ -253,9 +286,9 @@ void draw(){
     mode = 2;
   }
   
-  if (showHr == true){
-  tint(255, 255);
-  image(img3, 850, 430, 250, 300);
-  }
+    if (showHr == true){
+      tint(255, 255);
+      image(img3, 850, 430, 250, 300);
+    }
   }
 }

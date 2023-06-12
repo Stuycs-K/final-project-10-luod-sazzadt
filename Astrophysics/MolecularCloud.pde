@@ -85,7 +85,7 @@ class MolecularCloud{
   }
   
   boolean endStellarNeb() {
-    return (absorbed == ParticleSystem.length - 1);
+    return (absorbed > ParticleSystem.length - 20);
   }
   
  // void redGiant(boolean increase){
