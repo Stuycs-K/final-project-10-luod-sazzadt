@@ -23,15 +23,6 @@ class Button{
     text(name, x + 10, y + 14);
   }
   
-  void display2(){
-    noStroke();
-    fill(215, 206, 235);
-    rect(x, y, 120, 20, 20);
-    fill(135, 118, 171);
-    text(name, x + 10, y + 14);
-    image(img, width/2 - (width * 0.85)/2, height/2 - (height * 0.55)/2, width * 0.85, height * 0.55);
-  }
-  
   void update(){
     if (!(mousePressed)){
       if (mouseX >= x && mouseX <= x + 50 && mouseY > y && mouseY < y + 20){

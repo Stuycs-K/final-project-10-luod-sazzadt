@@ -88,26 +88,26 @@ class MolecularCloud{
     return (absorbed == ParticleSystem.length - 1);
   }
   
-  void redGiant(boolean increase){
-    centerOfGravity.display(255, 255, 255);
-    if (time > 300000 && time <= 400000){
-      //if (frameCount % 2 == 0){
-        //if (increase){increase();}
-        //else{decrease();}
-      //}
-      increase();
-    }
-  }
+ // void redGiant(boolean increase){
+ //   centerOfGravity.display(255, 255, 255);
+ //   if (time > 300000 && time <= 400000){
+ //     //if (frameCount % 2 == 0){
+ //       //if (increase){increase();}
+ //       //else{decrease();}
+ //     //}
+ //     increase();
+ //   }
+ // }
   
-  void updateColor(int r, int g, int b){
-    centerOfGravity.display(r, g, b);
-  }
+ // void updateColor(int r, int g, int b){
+ //   centerOfGravity.display(r, g, b);
+ // }
   
-  void increase(){
-      centerOfGravity.size += 0.5;
- }
+ // void increase(){
+ //     centerOfGravity.size += 0.5;
+ //}
  
- void decrease(){
-      centerOfGravity.size -= 0.2;
- }
+ //void decrease(){
+ //     centerOfGravity.size -= 0.2;
+ //}
 }

@@ -3,7 +3,7 @@ class Star {
   float radius;
   float mass;
   float temperature;
-  Particle centerOfGravity2;
+  //Particle centerOfGravity2;
   float starColor;
   float r2, g2, b2;
   float glowradius;
@@ -79,12 +79,12 @@ class Star {
     blendMode(BLEND);
   }
 
-  public void displayData(int x, int y) {
-    textSize(16);
-    fill(255, 0, 0);
-    text("Temperature: " + temperature +  " K", x + 40, y + 50);
-    text("Mass: " + mass + " kg", x + 40, y + 75);
-  }
+  //public void displayData(int x, int y) {
+  //  textSize(16);
+  //  fill(255, 0, 0);
+  //  text("Temperature: " + temperature +  " K", x + 40, y + 50);
+  //  text("Mass: " + mass + " kg", x + 40, y + 75);
+  //}
   public float getMass() {
     return mass;
   }
@@ -98,19 +98,19 @@ class Star {
     temperature = newTemp;
   }
   
-  void redGiant(){
-    int i = 1;
-    while (time > 10 && time < 10000){
-      if (i == 1 && frameCount % 3 == 0){
-        centerOfGravity2.size += 0.5;
-        i = 2;
-      }
-      else{
-        centerOfGravity2.size -= 0.2;
-        i = 1;
-      }
-    }
-  }
+  //void redGiant(){
+  //  int i = 1;
+  //  while (time > 10 && time < 10000){
+  //    if (i == 1 && frameCount % 3 == 0){
+  //      centerOfGravity2.size += 0.5;
+  //      i = 2;
+  //    }
+  //    else{
+  //      centerOfGravity2.size -= 0.2;
+  //      i = 1;
+  //    }
+  //  }
+  //}
   
   void display2(int x, int y, float r, float g, float b){
     colorMode(RGB, 255, 255, 255);

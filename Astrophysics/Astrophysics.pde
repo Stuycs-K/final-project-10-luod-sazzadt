@@ -25,19 +25,19 @@ boolean timeUp = false;
 boolean beginSimulate = false;
 float solarMass = 0;
 String stage;
-boolean contract;
+//boolean contract;
 float r, g, b;
 ArrayList<Float> lumGraph;
 boolean showGraph;
 int start, end, start2, end2;
 float timeNow;
 boolean reset;
-float timeWhenClicked;
+//float timeWhenClicked;
 boolean darker;
 boolean showInfo;
 int stageNum;
 PVector gravity = new PVector(0, 0.2);
-float mainseqStartNum;
+//float mainseqStartNum;
 int mode;
 boolean showHr;
 
@@ -109,7 +109,6 @@ void draw(){
     translate(-width/2, -height/2);
     image(img, width/2 - (width * 0.85)/2, height/2 - (height * 0.55)/2, width * 0.85, height * 0.55);
     play.run2();
-    //atomic.run4();
   }
   else if (mode == 2){
     translate(width/2, height/2);

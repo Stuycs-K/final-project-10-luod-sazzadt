@@ -1,7 +1,7 @@
 class Supernova{
   Particle Supernova;
   boolean exploded;
-  float x, y, choose;
+  float x, y;
   Particle[] Particles; 
   int count = 0;
   
