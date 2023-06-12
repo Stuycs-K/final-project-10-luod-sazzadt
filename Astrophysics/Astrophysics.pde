@@ -240,11 +240,21 @@ void draw(){
     //mainseqStartNum = timeSlider.getValue();
   }
   if (time == 430000){
-    stage = "Red Giant";
+    if(cloudDensity > 60) {
+      stage = "Red Supergiant";
+    }
+    else {
+      stage = "Red Giant";
+    }
     stageNum = 3;
   }
   if (time == 600000){
-    stage = "Supernova";
+    if(stage.equals("Red Supergiant")) {
+       stage = "Supernova";
+    }
+    else {
+      stage = "Planetary Nebula";
+    }
     stageNum = 4;
   }
   
