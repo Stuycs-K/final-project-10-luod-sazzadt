@@ -9,7 +9,12 @@ class Stats{
   "After 10^6 years, a dense, hot core of the size of Mercury's orbit called the protostar is formed. However, the core temperature is still not hot enough for nuclear fusion to occur.",
   "The main-sequence stage is where a star spends most of its lifetime on. As the pressure and gravity are finally balanced, the star has reached the the state of hydrostatic equilibrium.",
   "During the red giant phase, the star has completed fusing hydrogen in its core. The core collapsed, releasing lots of energy, which causes an increase in size and temperature of the star.",
-  "Once on the horizontal branch, the star slowly goes back to its original size and begins to increase in luminosity. The complete consumption of heavier and heavier elements through fusion takes less and less time."};
+  "Once on the horizontal branch, the star slowly goes back to its original size and begins to increase in luminosity. The complete consumption of heavier and heavier elements through fusion takes less and less time.",
+  "During a supernova, core rapidly collapses inwards, giving the name core collapse supernova (electron degeneracy pressure cannot hold the gravity up). Outer layers of the star are ejected.",
+  "A white dwarf is a type of stellar remnant for low mass stars. The star never gets hot enough to fuse carbon or oxygen in its core.",
+  "A neutron star is a type of stellar remnant for mid mass stars. It is a dense ball of neutrons held up by neutron degeneracy pressure.",
+  "A black hole is a type of stellar remnant for high mass stars. It is composed of a singularity and event horizon some radius away (called the Schwarzschild radius)."};
+  
   
   
   Stats(float mass, String stage){

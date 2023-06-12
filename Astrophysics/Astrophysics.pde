@@ -139,7 +139,7 @@ void draw(){
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
     time = 0;
-    timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
+    timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
   }
   if(sun.radius != molCloud.COGSize()) {
     sun.updateSize(molCloud.COGSize());
@@ -178,7 +178,7 @@ void draw(){
     sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
     time = 0;
-    timeSlider = new Slider(50, 625, 350, 20, 0, 600000, "Time (in thousands of years)", false);
+    timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
     reset = false;
     statsboard.resetStats();
     start = 0;
@@ -286,7 +286,7 @@ void draw(){
     mode = 2;
   }
   
-    if (showHr == true){
+  if (showHr == true){
       tint(255, 255);
       image(img3, 850, 430, 250, 300);
     }
