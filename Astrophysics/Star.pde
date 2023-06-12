@@ -78,6 +78,7 @@ class Star {
     colorMode(RGB, 255, 255, 255);
     blendMode(BLEND);
   }
+  
 
   //public void displayData(int x, int y) {
   //  textSize(16);
@@ -145,39 +146,46 @@ class Star {
   }
   
   void redGiantColor(){
-    if (stageNum == 3){
-      if (densitySlider.getValue() < 70){
-        g2 = g2 - 0.02;
-        b2 = b2 - 0.02;
-        starColor = starColor - 0.5;
-        solarMass -= 0.001;
-      }
-      else{
-        g2 = g2 - 0.3;
-        b2 = b2 - 0.3;
-        starColor = starColor - 2;
-        solarMass -= 0.002;
-      }
-        //if (densitySlider.getValue() > 20 && densitySlider.getValue() < 40){
-        //  g2 = g2 - 1;
-        //}
-        //else if (densitySlider.getValue() < 60){
-        //  g2 = g2 - 2;
-        //}
-        //else if (densitySlider.getValue() < 80){
-        //  r2 = r2 + 1;
-        //}
-        //else{
-        //  r2 = r2 + 1;
-        //  g2 = g2 + 1;
-        //}
-        if (glowradius >= height/4){
-        glowradius = glowradius + 0.3;}
-        //rmax = rmax - 0.00002;
-        //radius = radius - 0.002;
-        //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
-        //display2(width / 2, height / 2, r2, g2, b2);
+    if(time < 440000) {
+      return;
     }
+    if(stage.equals("Red Giant")) {
+      glowradius = Math.max(0, glowradius - 2.5);
+      createNebula();
+    }
+    /*
+    if (densitySlider.getValue() < 70){
+      g2 = g2 - 0.02;
+      b2 = b2 - 0.02;
+      starColor = starColor - 0.5;
+      solarMass -= 0.001;
+    }
+    else{
+      g2 = g2 - 0.3;
+      b2 = b2 - 0.3;
+      starColor = starColor - 2;
+      solarMass -= 0.002;
+    }
+      //if (densitySlider.getValue() > 20 && densitySlider.getValue() < 40){
+      //  g2 = g2 - 1;
+      //}
+      //else if (densitySlider.getValue() < 60){
+      //  g2 = g2 - 2;
+      //}
+      //else if (densitySlider.getValue() < 80){
+      //  r2 = r2 + 1;
+      //}
+      //else{
+      //  r2 = r2 + 1;
+      //  g2 = g2 + 1;
+      //}
+      if (glowradius >= height/4){
+      glowradius = glowradius + 0.3;}
+      //rmax = rmax - 0.00002;
+      //radius = radius - 0.002;
+      //glow(width/2, height/2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
+      //display2(width / 2, height / 2, r2, g2, b2);
+      */
   }
 
 }
