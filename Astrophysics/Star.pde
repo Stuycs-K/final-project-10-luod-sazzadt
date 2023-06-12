@@ -8,6 +8,7 @@ class Star {
   float r2, g2, b2;
   float glowradius;
   float rmax;
+  float brightness;
   
   public Star(float theRadius, float theMass, float theTemperature) {
     mass = theMass;
@@ -16,6 +17,7 @@ class Star {
     core = new Core(ELLIPSE, radius / 5);
     glowradius = height/2;
     rmax = 0.5;
+    brightness = 100;
   }
 
   public void display(int x, int y, float density) {
@@ -180,5 +182,45 @@ class Star {
         //display2(width / 2, height / 2, r2, g2, b2);
     }
   }
-
+  
+  void horizontalBranch(){
+    glowradius = glowradius - 0.5;
+    solarMass = solarMass - 0.005;
+  }
+  
+  void supernova(){
+    glowradius = glowradius + 10;
+    solarMass = solarMass + 0.01;
+    brightness = brightness - 10;
+  }
+  
+  void glow2(float x, float y, float saturation) {
+    colorMode(HSB, 360, 100, 100, 100);
+    blendMode(ADD);
+    noStroke();
+    for (float r = 0.0; r < rmax; r += 0.01) {
+      fill(starColor, saturation, brightness);
+      circle(x, y, glowradius * r * (radius / 20) * 0.5);
+    }
+    colorMode(RGB, 255, 255, 255);
+    blendMode(BLEND);
+  }
+  
+  void glow3(float x, float y) {
+    colorMode(HSB, 360, 100, 100, 100);
+    blendMode(ADD);
+    noStroke();
+    for (float r = 0.0; r < rmax; r += 0.01) {
+      fill(starColor, 0, 5, 100);
+      circle(x, y, glowradius * r * (radius / 20) * 0.5);
+    }
+    colorMode(RGB, 255, 255, 255);
+    blendMode(BLEND);
+  }
+  
+  void whiteDwarf(){
+    radius = 100 * (densitySlider.getValue() / 100);
+    display2(width/2, height/2, 255, 255, 255);
+    glow3(width/2, height/2);
+  }
 }

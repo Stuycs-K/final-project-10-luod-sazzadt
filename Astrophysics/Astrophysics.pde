@@ -14,6 +14,7 @@ Button infoButton;
 Stats infoboard;
 Button Hr;
 PImage img, img2, img3;
+Supernova s;
 
 //Global Variables
 boolean startPlay = false;
@@ -52,7 +53,7 @@ void setup(){
   //Initialize Sliders
   densitySlider = new Slider(800, 650, 130, 20, 0, 100, "Molecular Cloud Density", true); 
   densitySlider.display();
-  timeSlider = new Slider(50, 680, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
+  timeSlider = new Slider(50, 680, 350, 20, 0, 1000000, "Time (in thousands of years)", false);
   timeSlider.display();
   cloudDensity = densitySlider.getValue();
   
@@ -90,6 +91,7 @@ void setup(){
   infoButton = new Button(50, 170, "Learn More");
   infoboard = new Stats();
   Hr = new Button(800, 250, "HR Diagram");
+  s = new Supernova(width/2, height/2);
 }
 
 void tick() {
@@ -136,7 +138,7 @@ void draw(){
   if (cloudDensity != densitySlider.getValue()){
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
     time = 0;
-    timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
+    timeSlider = new Slider(50, 625, 350, 20, 0, 1000000, "Time (in thousands of years)", false);
   }
   if(sun.radius != molCloud.COGSize()) {
     sun.updateSize(molCloud.COGSize());
@@ -145,7 +147,8 @@ void draw(){
   //Display animation
   molCloud.display(doneSetUp, r, g, b, stage);
   statsboard.changeStats(solarMass, stage);
-  sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
+  if (stageNum < 5){
+  sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));}
   if (time <= 300000){
   sun.display(width / 2, height / 2, cloudDensity);}
   
@@ -172,7 +175,7 @@ void draw(){
     sun = new Star(molCloud.COGSize(), (float) (1.989 * Math.pow(10, 30)), 5772);
     molCloud = new MolecularCloud(densitySlider.getValue(), 300);
     time = 0;
-    timeSlider = new Slider(50, 625, 350, 20, 0, 1200000, "Time (in thousands of years)", false);
+    timeSlider = new Slider(50, 625, 350, 20, 0, 1000000, "Time (in thousands of years)", false);
     reset = false;
     statsboard.resetStats();
     start = 0;
@@ -193,9 +196,19 @@ void draw(){
     sun.redGiantColor();
   }
   if (stageNum == 4){
-   
+   sun.horizontalBranch();
   }
-  sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);
+  if (stageNum == 5){
+   s.update();
+   s.show();
+   sun.supernova();
+   sun.glow(width / 2, height / 2, Math.max(30, 90 - (statsboard.luminosity/ 10)));
+  }
+  if (stageNum == 6){
+    sun.whiteDwarf();
+  }
+  if (stageNum < 6){
+  sun.display2(width / 2, height / 2, sun.r2, sun.g2, sun.b2);}
   
   
   
@@ -244,8 +257,28 @@ void draw(){
     stageNum = 3;
   }
   if (time == 600000){
-    stage = "Supernova";
+    stage = "Horizontal Branch";
     stageNum = 4;
+  }
+  
+  if (time == 700000){
+    stage = "Supernova";
+    stageNum = 5;
+  }
+  
+  if (time == 750000){
+    if (densitySlider.getValue() < 20){
+      stageNum = 6;
+      stage = "White Dwarf";
+    }
+    else if (densitySlider.getValue() < 80){
+      stageNum = 7;
+      stage = "Neutron Star";
+    }
+    else{
+      stageNum = 8;
+      stage = "Black Hole";
+    }
   }
   
   if (time == timeSlider.max){
