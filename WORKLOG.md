@@ -106,3 +106,28 @@ Created supernova animation and black hole animation.
 
 #### 6/11/23
 Fixed issues with timing of transition between phases, fixed stellar nebula.
+
+# Development Log
+## Working features
+1. Animated introduction screen
+2. Molecular cloud that updates based on user-selected density
+3. Color of future main-sequence star determined based on molecular cloud density
+3. Density Slider and Time Bar
+4. Luminosity vs. Time Graph
+5. Gas effect on particles in molecular cloud
+6. Rotation of particles around core in stellar nebula phase
+7. Collapse of particles during protostar phase
+8. Expansion of core as particles are absorbed
+9. Glowing effect of star proportional to calculated luminosity, color determined by density
+10. Hertzsprung-Russell diagram
+11. Mass, Temperature, and Luminosity calculations
+12. Information Sidebar for learning more about each star's phase
+13. Reset button
+14. Red Giant and Red Supergiant animation
+15. White Dwarf, Supernova, Blackhole animation
+16. Planetary Nebula animation
+## Broken features / Bugs
+1. Delay when using density slider because of high runtime for re-initializing the simulation
+2. Potentially high levels of lag with high densities depending on how powerful your computer is
+## Content Resources
+1. https://www.schoolsobservatory.org/learn/astro/stars/cycle
