@@ -129,5 +129,10 @@ Fixed issues with timing of transition between phases, fixed stellar nebula.
 ## Broken features / Bugs
 1. Delay when using density slider because of high runtime for re-initializing the simulation
 2. Potentially high levels of lag with high densities depending on how powerful your computer is
+3. The simulation is not 100% accurate to real scientific phenomenon
 ## Content Resources
 1. https://www.schoolsobservatory.org/learn/astro/stars/cycle
+2. https://astronomy.swin.edu.au/cosmos/s/Stellar+Evolution
+3. https://thecodingtrain.com/
+4. https://happycoding.io/tutorials/processing/
+5. https://www.accessscience.com/content/article/a654000
